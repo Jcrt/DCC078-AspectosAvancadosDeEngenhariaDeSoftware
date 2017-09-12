@@ -29,7 +29,6 @@ public class Contato {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
-        
     }
 
     public String getNome() {
