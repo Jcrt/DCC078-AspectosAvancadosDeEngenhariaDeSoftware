@@ -5,6 +5,7 @@
  */
 package Models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -34,7 +35,24 @@ public class Contato implements Observer {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
-        
+    }
+    
+    @Override
+    public void update(Observable produto, Object arg) {
+        if(produto instanceof Produto){
+            Produto p = (Produto) produto;
+            System.out.println("Observador: " + this.nome + "; "
+                    + "Produto: " + p.getNome() + "; "
+                    + "Estoque: " + String.valueOf(p.getEstoque())
+            );
+        }
+    }
+    
+    public void putProdutosDesejados(Observable o){
+        if(this.produtosDesejados == null)
+            this.produtosDesejados = new ArrayList();
+        this.produtosDesejados.add(o);
+        o.addObserver(this);
     }
 
     public String getNome() {
@@ -60,11 +78,6 @@ public class Contato implements Observer {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public List<Observable> getProdutosDesejados() {
         return produtosDesejados;
@@ -73,5 +86,4 @@ public class Contato implements Observer {
     public void setProdutosDesejados(List<Observable> produtosDesejados) {
         this.produtosDesejados = produtosDesejados;
     }
-    
 }

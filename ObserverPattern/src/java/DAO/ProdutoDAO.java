@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import Models.Contato;
 import Models.Produto;
 import Persistencia.DatabaseLocator;
 import java.sql.Connection;
@@ -57,7 +56,7 @@ public class ProdutoDAO {
         
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.prepareStatement("SELECT * FROM produtos WHERE id = ?");
+            st = conn.prepareStatement("SELECT * FROM produto WHERE id = ?");
             st.setInt(1, codigo);
             rs = st.executeQuery();
             
@@ -84,7 +83,7 @@ public class ProdutoDAO {
         
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.prepareStatement("SELECT * FROM produtos ORDER BY nome");
+            st = conn.prepareStatement("SELECT * FROM produto ORDER BY nome");
             rs = st.executeQuery();
             
             while(rs.next()){

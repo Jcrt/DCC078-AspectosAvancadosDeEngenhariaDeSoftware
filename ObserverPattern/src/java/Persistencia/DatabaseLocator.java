@@ -28,8 +28,12 @@ public class DatabaseLocator {
     
     public Connection getConnection() throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
+        /*Connection conn =
+            (Connection) DriverManager.getConnection("jdbc:mysql://172.18.10.31/07228620674", "07228620674", "23654789Siga");
+         */
         Connection conn =
-                (Connection) DriverManager.getConnection("jdbc:mysql://172.18.10.31/07228620674", "07228620674", "23654789Siga");
+            (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/DCC078", "root", "rootpass#1");
+         
         return conn;
     }
 }

@@ -6,6 +6,7 @@
 package DAO;
 
 import Models.Contato;
+import Models.Produto;
 import Persistencia.DatabaseLocator;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  *
@@ -123,6 +125,37 @@ public class ContatoDAO {
                         rs.getString("email")
                     )
                 );
+            }
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return contactList;
+    }
+    
+    public List<Contato> listarObservadorProduto(Produto p) throws ClassNotFoundException, SQLException{
+        String sql = "SELECT c.* FROM contatos c INNER JOIN contatos_observam_produtos cop "
+                            + "ON c.codigo = cop.contatos_codigo AND cop.produto_id = ? ORDER BY nome";
+        Connection conn = null;
+        PreparedStatement st = null;
+        List<Contato> contactList = new ArrayList<>();
+        
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.prepareStatement(sql);
+            st.setInt(1, p.getId());
+            
+            ResultSet rs = st.executeQuery();
+            
+            while(rs.next()){
+                Contato c = new Contato(
+                        rs.getInt("codigo"), 
+                        rs.getString("nome"), 
+                        rs.getString("email")
+                    );
+                c.putProdutosDesejados(p);
+                contactList.add(c);
             }
         } catch(SQLException e) {
             throw e;
