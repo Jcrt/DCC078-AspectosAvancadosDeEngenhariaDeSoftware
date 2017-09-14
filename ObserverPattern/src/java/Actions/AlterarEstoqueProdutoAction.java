@@ -31,6 +31,7 @@ public class AlterarEstoqueProdutoAction implements Action {
             ContatoDAO cDAO = ContatoDAO.getInstance();
             
             Produto p = pDAO.ler(idProduto);
+            
             List<Contato> c = cDAO.listarObservadorProduto(p);
             
             p.setEstoque(estoque);

@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="FrontController?action=AlterarEstoqueProduto&idProduto=1&estoque=5"> Alterar estoque do produto 1 para 5 </a>
+        <a href="FrontController?action=ListarProdutos"> Ir para lista de produtos </a>
+        <!-- <a href="FrontController?action=AlterarEstoqueProduto&idProduto=1&estoque=5"> Alterar estoque do produto 1 para 5 </a> -->
     </body>
 </html>

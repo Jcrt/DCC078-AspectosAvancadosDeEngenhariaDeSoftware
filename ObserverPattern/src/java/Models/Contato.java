@@ -15,10 +15,12 @@ import java.util.Observer;
  * @author 07228620674
  */
 public class Contato implements Observer {
+    
     private int codigo;
     private String nome;
     private String email;
     private List<Observable> produtosDesejados;
+    private String msgDoObservado;
     
     public Contato(){
         
@@ -41,10 +43,10 @@ public class Contato implements Observer {
     public void update(Observable produto, Object arg) {
         if(produto instanceof Produto){
             Produto p = (Produto) produto;
-            System.out.println("Observador: " + this.nome + "; "
+            String msg = "Observador: " + this.nome + "; "
                     + "Produto: " + p.getNome() + "; "
-                    + "Estoque: " + String.valueOf(p.getEstoque())
-            );
+                    + "Estoque: " + String.valueOf(p.getEstoque());
+            this.msgDoObservado = msg;
         }
     }
     
@@ -55,6 +57,10 @@ public class Contato implements Observer {
         o.addObserver(this);
     }
 
+    public String getMsgDoObservado() {
+        return msgDoObservado;
+    }
+    
     public String getNome() {
         return nome;
     }
