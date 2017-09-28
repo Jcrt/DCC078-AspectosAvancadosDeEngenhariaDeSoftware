@@ -9,6 +9,7 @@ import DAO.ProdutoDAO;
 import Models.Produto;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +30,13 @@ public class ListarProdutosAction implements Action{
         
         try {
             
-            List<Produto> prods = pDAO.listar();
-            for(int i = 0; i < prods.size(); i++){
-                Produto p = prods.get(i);
-                if(p.getEstoque() > 0)
-                    prods.remove(i);
+            List<Produto> prods = new ArrayList<>();
+            for(Produto prod : pDAO.listar()){
+                if(prod.getEstoque() == 0){
+                    prods.add(prod);
+                }
             }
-            
+
             request.setAttribute("ProdutosList", prods);
             RequestDispatcher rd = request.getRequestDispatcher("ListarProdutos.jsp");
             rd.forward(request, response);

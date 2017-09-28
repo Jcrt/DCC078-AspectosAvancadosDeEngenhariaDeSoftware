@@ -41,6 +41,7 @@ public class ProdutoDAO {
             st = conn.prepareStatement("UPDATE produto SET estoque = ? WHERE id = ?");
             st.setInt(1, prod.getEstoque());
             st.setInt(2, prod.getId());
+            st.executeUpdate();
         } catch(SQLException e) {
             throw e;
         } finally {
