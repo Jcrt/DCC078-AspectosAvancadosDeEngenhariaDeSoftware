@@ -47,6 +47,7 @@ public class Contato implements Observer {
                     + "Produto: " + p.getNome() + "; "
                     + "Estoque: " + String.valueOf(p.getEstoque());
             this.msgDoObservado = msg;
+            System.out.println(msg);
         }
     }
     
