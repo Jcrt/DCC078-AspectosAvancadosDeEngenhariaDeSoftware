@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,17 @@ public class AndamentoLido extends Andamento {
     
     private List<AndamentoLeituraDados> leitoresAndamento;
     
+    public AndamentoLido(){
+        this.leitoresAndamento = new ArrayList<>();
+    }
     
-
     @Override
     public String getStatusLido() {
-        return "Lido por: ";
+        String dadosLeitura = "";
+        for(AndamentoLeituraDados a : leitoresAndamento){
+            dadosLeitura += a.getLeitor().getNome() + "["+ a.getData() +"]; ";
+        }
+        
+        return "Lido por: " + dadosLeitura;
     }
 }

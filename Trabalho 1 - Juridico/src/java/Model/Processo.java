@@ -17,7 +17,7 @@ import java.util.List;
 public class Processo {
     private int id;
     private String numeroProcesso;
-    private List<Pessoa> envolvidos; 
+    private List<EnvolvimentoProcesso> envolvidos; 
     private StatusEnum status;
     private List<Andamento> andamentos;
     private Date dataCadastro;
@@ -27,10 +27,10 @@ public class Processo {
     public Processo(){
         this.envolvidos = new ArrayList<>();
         this.andamentos = new ArrayList<>();
-        this.status = StatusEnum.ativo;
+        this.status = StatusEnum.ATIVO;
     }
     
-    public void addEnvolvido(Pessoa p){
+    public void addEnvolvido(EnvolvimentoProcesso p){
         this.envolvidos.add(p);
     }
     
@@ -50,11 +50,11 @@ public class Processo {
         this.numeroProcesso = numeroProcesso;
     }
 
-    public List<Pessoa> getEnvolvidos() {
+    public List<EnvolvimentoProcesso> getEnvolvidos() {
         return envolvidos;
     }
 
-    public void setEnvolvidos(List<Pessoa> envolvidos) {
+    public void setEnvolvidos(List<EnvolvimentoProcesso> envolvidos) {
         this.envolvidos = envolvidos;
     }
 

@@ -25,4 +25,24 @@ public class AndamentoLeituraDados {
         this.leitor = leitor;
         this.data = data;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Pessoa getLeitor() {
+        return leitor;
+    }
+
+    public void setLeitor(Pessoa leitor) {
+        this.leitor = leitor;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 }

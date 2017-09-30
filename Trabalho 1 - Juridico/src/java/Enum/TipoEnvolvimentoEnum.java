@@ -7,17 +7,17 @@ package Enum;
 
 /**
  *
- * @author 07228620674
+ * @author Julio R. Trindade
  */
-public enum StatusEnum {
-    ATIVO(1), 
-    ARQUIVADO(2), 
-    BAIXAPROVISORIA(3), 
-    ENCERRADO(4);
+public enum TipoEnvolvimentoEnum {
+    CLIENTE(1), 
+    CONTRARIO(2), 
+    ADVOGADO(3), 
+    OUTROS(4);
     
     private final int valor;
     
-    StatusEnum(int valor){
+    TipoEnvolvimentoEnum(int valor){
         this.valor = valor;
     }
     
