@@ -11,8 +11,8 @@ import java.sql.SQLException;
  *
  * @author thassya
  */
-public abstract class PessoaDAO<T> {
-    public abstract void salvar(T objeto) throws SQLException;    
+public interface PessoaDAO<T> {
+    public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;    
 }
 
 

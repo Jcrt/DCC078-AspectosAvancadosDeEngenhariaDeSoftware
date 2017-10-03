@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author thassya
  */
-public class AdvogadoDAO {
+public class AdvogadoDAO implements PessoaDAO<Advogado> {
 
     private static AdvogadoDAO instance;
 
@@ -29,6 +29,13 @@ public class AdvogadoDAO {
         return instance;
     }
 
+    /**
+     *
+     * @param model
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
     public void salvar(Advogado model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
