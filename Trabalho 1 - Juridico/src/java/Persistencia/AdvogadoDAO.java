@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author thassya
  */
-public class AdvogadoDAO {
+public class AdvogadoDAO implements PessoaDAO<PessoaAdvogado> {
 
     private static AdvogadoDAO instance;
 

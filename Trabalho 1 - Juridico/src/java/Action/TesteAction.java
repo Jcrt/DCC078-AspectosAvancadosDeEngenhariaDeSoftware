@@ -19,7 +19,6 @@ public class TesteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Processo p = new Processo();
-        Pessoa pess1 = new Pessoa();
+        
     }    
 }
