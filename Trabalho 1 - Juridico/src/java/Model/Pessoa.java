@@ -5,7 +5,6 @@
  */
 package Model;
 
-import Enum.TipoEnvolvimentoEnum;
 import Interface.IPessoa;
 
 /**

@@ -5,7 +5,7 @@
  */
 package Persistencia;
 
-import Model.Advogado;
+import Model.PessoaAdvogado;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +29,7 @@ public class AdvogadoDAO {
         return instance;
     }
 
-    public void salvar(Advogado model) throws SQLException, ClassNotFoundException {
+    public void salvar(PessoaAdvogado model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         

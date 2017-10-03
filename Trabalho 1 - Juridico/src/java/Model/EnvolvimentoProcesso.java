@@ -6,12 +6,14 @@
 package Model;
 
 import Enum.TipoEnvolvimentoEnum;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class EnvolvimentoProcesso {
+public class EnvolvimentoProcesso implements Observer {
     private int id;
     private Pessoa pessoaEnvolvimento;
     private TipoEnvolvimentoEnum tipoEnvolvimento;
@@ -46,6 +48,9 @@ public class EnvolvimentoProcesso {
     public void setTipoEnvolvimento(TipoEnvolvimentoEnum tipoEnvolvimento) {
         this.tipoEnvolvimento = tipoEnvolvimento;
     }
-    
-    
+
+    @Override
+    public void update(Observable processo, Object arg) {
+        System.out.println("teste");
+    }
 }

@@ -11,15 +11,16 @@ import Enum.TipoEnvolvimentoEnum;
  *
  * @author 07228620674
  */
-public class Advogado extends Pessoa {
-    
+public class PessoaContrario extends Pessoa {
+
     @Override
     public String getTipoDocumento() {
-        return "OAB"; 
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int getTipo(){
-        return TipoEnvolvimentoEnum.ADVOGADO.getValor();
+    public int getTipo() {
+        return TipoEnvolvimentoEnum.CONTRARIO.getValor();
     }
+    
 }

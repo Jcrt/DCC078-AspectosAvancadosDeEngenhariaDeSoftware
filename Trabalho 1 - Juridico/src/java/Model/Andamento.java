@@ -15,7 +15,11 @@ public abstract class Andamento {
     private int id;
     private String descricao;
     private Date data;
-    public abstract String getStatusLido();
+    public abstract String getLeitoresAndamento();
+    
+    public String getStatusLido(){
+        return "[Data: " + Date.valueOf(data.toString()) + "] - " + getLeitoresAndamento();
+    }
     
     public Andamento(){
         

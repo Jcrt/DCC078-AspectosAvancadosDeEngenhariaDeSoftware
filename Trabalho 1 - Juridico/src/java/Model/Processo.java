@@ -9,12 +9,13 @@ import Enum.StatusEnum;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  *
  * @author 07228620674
  */
-public class Processo {
+public class Processo extends Observable {
     private int id;
     private String numeroProcesso;
     private List<EnvolvimentoProcesso> envolvidos; 
@@ -36,6 +37,8 @@ public class Processo {
     
     public void addAndamento(Andamento a){
         this.andamentos.add(a);
+        setChanged();
+        notifyObservers();
     }
 
     public void setId(int id) {
@@ -64,6 +67,8 @@ public class Processo {
 
     public void setStatus(StatusEnum status) {
         this.status = status;
+        setChanged();
+        notifyObservers();
     }
 
     public List<Andamento> getAndamentos() {

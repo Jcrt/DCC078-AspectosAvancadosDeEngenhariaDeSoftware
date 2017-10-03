@@ -14,18 +14,20 @@ import java.util.List;
  */
 public class AndamentoLido extends Andamento {
     
-    private List<AndamentoLeituraDados> leitoresAndamento;
+    private final List<AndamentoLeituraDados> leitoresAndamento;
     
     public AndamentoLido(){
         this.leitoresAndamento = new ArrayList<>();
     }
     
     @Override
-    public String getStatusLido() {
+    public String getLeitoresAndamento() {
         String dadosLeitura = "";
-        for(AndamentoLeituraDados a : leitoresAndamento){
-            dadosLeitura += a.getLeitor().getNome() + "["+ a.getData() +"]; ";
-        }
+        dadosLeitura = leitoresAndamento.stream()
+                            .map((AndamentoLeituraDados a) -> a.getLeitor().getNome() 
+                                    +"[" + a.getData()+ "]; "
+                            )
+                            .reduce(dadosLeitura, String::concat);
         
         return "Lido por: " + dadosLeitura;
     }

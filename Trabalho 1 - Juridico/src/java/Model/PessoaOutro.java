@@ -5,15 +5,22 @@
  */
 package Model;
 
+import Enum.TipoEnvolvimentoEnum;
+
 /**
  *
  * @author 07228620674
  */
-public class AndamentoNaoLido extends Andamento {
+public class PessoaOutro extends Pessoa {
 
     @Override
-    public String getLeitoresAndamento() {
-        return "Nenhum envolvido leu este andamento até o momento";
+    public String getTipoDocumento() {
+        return "RG: ";
+    }
+
+    @Override
+    public int getTipo() {
+        return TipoEnvolvimentoEnum.OUTROS.getValor();
     }
     
 }
