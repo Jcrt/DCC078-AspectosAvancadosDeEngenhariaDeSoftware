@@ -29,6 +29,7 @@ public class AdvogadoDAO implements PessoaDAO<PessoaAdvogado> {
         return instance;
     }
 
+    @Override
     public void salvar(PessoaAdvogado model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -50,7 +51,7 @@ public class AdvogadoDAO implements PessoaDAO<PessoaAdvogado> {
     private void closeResources(Connection conn, Statement st) {
         try {
             if(st!=null) st.close();
-            if(conn!=null) conn.close();
+                if(conn!=null) conn.close();
 
         } catch(SQLException e) {
 
