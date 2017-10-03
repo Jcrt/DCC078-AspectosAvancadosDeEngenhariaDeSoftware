@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Enum.TipoEnvolvimentoEnum;
 import Interface.IPessoa;
 
 /**
@@ -17,6 +18,7 @@ public abstract class Pessoa implements IPessoa {
     private String tipoDocumento;
     private String numeroDocumento;
     private String email;
+    private int tipo;
     
     public Pessoa(){
         
@@ -29,6 +31,14 @@ public abstract class Pessoa implements IPessoa {
         this.tipoDocumento = tipoDocumento;
     }
 
+     public Pessoa(int id, String nome, String tipoDocumento, int tipo){
+        this();
+        this.id = id; 
+        this.nome = nome;
+        this.tipoDocumento = tipoDocumento;
+        this.tipo =tipo;
+    }
+     
     public int getId() {
         return id;
     }
@@ -59,5 +69,5 @@ public abstract class Pessoa implements IPessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }
+    }    
 }

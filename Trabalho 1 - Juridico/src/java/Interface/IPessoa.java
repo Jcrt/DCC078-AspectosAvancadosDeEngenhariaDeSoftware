@@ -5,10 +5,13 @@
  */
 package Interface;
 
+import Enum.TipoEnvolvimentoEnum;
+
 /**
  *
  * @author 07228620674
  */
 public interface IPessoa {
     String getTipoDocumento();
+    int getTipo();
 }

@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Enum.TipoEnvolvimentoEnum;
+
 /**
  *
  * @author 07228620674
@@ -14,5 +16,10 @@ public class Advogado extends Pessoa {
     @Override
     public String getTipoDocumento() {
         return "OAB"; 
+    }
+
+    @Override
+    public int getTipo(){
+        return TipoEnvolvimentoEnum.ADVOGADO.getValor();
     }
 }
