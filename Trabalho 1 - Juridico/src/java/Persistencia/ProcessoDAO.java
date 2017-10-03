@@ -5,14 +5,10 @@
  */
 package Persistencia;
 
-import java.sql.SQLException;
-
 /**
  *
  * @author thassya
  */
-public interface PessoaDAO<T> {
-    public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;    
+public class ProcessoDAO{
+    
 }
-
-
