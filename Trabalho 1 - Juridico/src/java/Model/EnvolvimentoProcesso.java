@@ -41,8 +41,8 @@ public class EnvolvimentoProcesso implements Observer {
         this.pessoaEnvolvimento = pessoaEnvolvimento;
     }
 
-    public TipoEnvolvimentoEnum getTipoEnvolvimento() {
-        return tipoEnvolvimento;
+    public int getTipoEnvolvimento() {
+        return tipoEnvolvimento.getValor();
     }
 
     public void setTipoEnvolvimento(TipoEnvolvimentoEnum tipoEnvolvimento) {

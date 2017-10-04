@@ -61,8 +61,8 @@ public class Processo extends Observable {
         this.envolvidos = envolvidos;
     }
 
-    public StatusEnum getStatus() {
-        return status;
+    public int getStatus() {
+        return status.getValor();
     }
 
     public void setStatus(StatusEnum status) {
