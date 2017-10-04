@@ -56,17 +56,8 @@ public class ProcessoDAO {
             if (rs.next()) {
                 final int idInserido = rs.getInt(1);
             }
-
-            sql = "INSERT INTO envolvimentoProcesso (idProcesso, idPessoa, tipoEnvolvimento) VALUES (?,?,?);";
-
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, model.getNumeroProcesso());
-            ps.setInt(2, model.getStatus());
-            ps.setDate(3, model.getDataCadastro());
-            ps.setDate(4, model.getDataBaixa());
-            ps.setDate(5, model.getDataEncerramento());
-
-            ps.execute();
+            
+            
 
         } catch (SQLException e) {
             throw e;

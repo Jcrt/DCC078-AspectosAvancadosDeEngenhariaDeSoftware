@@ -45,6 +45,9 @@ public class EnvolvimentoProcesso implements Observer {
     public Pessoa getPessoaEnvolvimento() {
         return pessoaEnvolvimento;
     }
+    public int getIdPessoaEnvolvimento() {
+        return pessoaEnvolvimento.getId();
+    }
 
     public void setPessoaEnvolvimento(Pessoa pessoaEnvolvimento) {
         this.pessoaEnvolvimento = pessoaEnvolvimento;
