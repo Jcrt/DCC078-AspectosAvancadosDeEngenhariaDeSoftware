@@ -7,6 +7,7 @@ package Persistencia;
 
 import Model.PessoaOutro;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,7 +31,29 @@ public class PessoaOutroDAO implements PessoaDAO<PessoaOutro> {
     }
 
     @Override
-    public void salvar(PessoaOutro objeto) throws SQLException, ClassNotFoundException {
+    public void salvar(PessoaOutro model) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "INSERT INTO pessoa (nome, tipoDocumento, numeroDocumento, email, tipo) VALUES (?,?,?,?,?);";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, model.getNome());
+            ps.setString(2, model.getTipoDocumento());
+            ps.setString(3, model.getNumeroDocumento());
+            ps.setString(4, model.getEmail());
+            ps.setInt(5, model.getTipo());
+
+            ps.execute();
+           
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, ps);
+        }
     }
     
      private void closeResources(Connection conn, Statement st) {
