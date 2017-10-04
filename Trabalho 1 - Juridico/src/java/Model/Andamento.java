@@ -12,17 +12,20 @@ import java.sql.Date;
  * @author 07228620674
  */
 public abstract class Andamento {
+
     private int id;
     private String descricao;
     private Date data;
+    private int idProcesso;
+
     public abstract String getLeitoresAndamento();
-    
-    public String getStatusLido(){
+
+    public String getStatusLido() {
         return "[Data: " + Date.valueOf(data.toString()) + "] - " + getLeitoresAndamento();
     }
-    
-    public Andamento(){
-        
+
+    public Andamento() {
+
     }
 
     public Andamento(int id, String descricao, Date data) {
@@ -30,6 +33,14 @@ public abstract class Andamento {
         this.id = id;
         this.descricao = descricao;
         this.data = data;
+    }
+
+    public Andamento(int id, String descricao, Date data, int idProcesso) {
+        this();
+        this.id = id;
+        this.descricao = descricao;
+        this.data = data;
+        this.idProcesso = idProcesso;
     }
 
     public int getId() {
@@ -51,4 +62,13 @@ public abstract class Andamento {
     public void setData(Date data) {
         this.data = data;
     }
+
+    public int getIdProcesso() {
+        return idProcesso;
+    }
+
+    public void setIdProcesso(int idProcesso) {
+        this.idProcesso = idProcesso;
+    }
+
 }

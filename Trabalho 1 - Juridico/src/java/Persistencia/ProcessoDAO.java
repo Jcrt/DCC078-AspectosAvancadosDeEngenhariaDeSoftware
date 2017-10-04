@@ -19,9 +19,12 @@ import java.sql.Statement;
 public class ProcessoDAO {
 
     private static ProcessoDAO instance;
+    private static AndamentoDAO andamento = null;
+    private static EnvolvimentoProcessoDAO envolvimento = null;
 
     private ProcessoDAO() {
-
+        andamento = AndamentoDAO.getInstance();
+        envolvimento = EnvolvimentoProcessoDAO.getInstance();
     }
 
     public static ProcessoDAO getInstance() {
@@ -31,6 +34,7 @@ public class ProcessoDAO {
         return instance;
     }
     
+         
      public void salvar(Processo model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ps = null;

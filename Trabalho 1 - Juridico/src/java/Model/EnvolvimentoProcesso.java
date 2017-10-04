@@ -17,6 +17,7 @@ public class EnvolvimentoProcesso implements Observer {
     private int id;
     private Pessoa pessoaEnvolvimento;
     private TipoEnvolvimentoEnum tipoEnvolvimento;
+    private int idProcesso;
     
     public EnvolvimentoProcesso(){
         
@@ -27,6 +28,14 @@ public class EnvolvimentoProcesso implements Observer {
         this.id = id;
         this.pessoaEnvolvimento = p;
         this.tipoEnvolvimento = tipo;
+    }
+    
+     public EnvolvimentoProcesso(int id, Pessoa p, TipoEnvolvimentoEnum tipo, int idProcesso){
+        this();
+        this.id = id;
+        this.pessoaEnvolvimento = p;
+        this.tipoEnvolvimento = tipo;
+        this.idProcesso = idProcesso;
     }
 
     public int getId() {
@@ -49,6 +58,15 @@ public class EnvolvimentoProcesso implements Observer {
         this.tipoEnvolvimento = tipoEnvolvimento;
     }
 
+    public int getIdProcesso() {
+        return idProcesso;
+    }
+
+    public void setIdProcesso(int idProcesso) {
+        this.idProcesso = idProcesso;
+    }
+
+    
     @Override
     public void update(Observable processo, Object arg) {
         System.out.println("teste");
