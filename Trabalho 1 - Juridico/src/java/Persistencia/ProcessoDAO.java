@@ -33,8 +33,6 @@ public class ProcessoDAO {
         }
         return instance;
     }
-    
-    //
          
      public void salvar(Processo model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
