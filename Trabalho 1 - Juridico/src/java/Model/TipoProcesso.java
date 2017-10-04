@@ -10,7 +10,8 @@ package Model;
  * @author thassya
  */
 public class TipoProcesso {
-
+ 
+    
     private TipoProcessoEstado estado;
 
     public TipoProcesso() {
