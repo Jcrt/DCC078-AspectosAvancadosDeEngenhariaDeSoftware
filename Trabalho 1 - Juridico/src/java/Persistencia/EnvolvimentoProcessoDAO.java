@@ -28,19 +28,21 @@ public class EnvolvimentoProcessoDAO {
         }
         return instance;
     }
-    public void salvar(EnvolvimentoProcesso model) throws SQLException, ClassNotFoundException {
+    public void salvar(EnvolvimentoProcesso model, String msg) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "INSERT INTO envolvimentoProcesso (idProcesso, idPessoa, tipoEnvolvimento) VALUES (?,?,?);";
+             String sql = "INSERT INTO envolvidoNotificacaoProcesso (processo_id, pessoa_id, mensagem, data) "
+                       + " VALUES (?,?,?,?);";
 
             ps = conn.prepareStatement(sql);
 
             ps.setInt(1, model.getIdProcesso());
             ps.setInt(2, model.getIdPessoaEnvolvimento());
-            ps.setInt(3, model.getTipoEnvolvimento());
+            ps.setString(3, msg);
+            ps.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
             
             ps.execute();
 

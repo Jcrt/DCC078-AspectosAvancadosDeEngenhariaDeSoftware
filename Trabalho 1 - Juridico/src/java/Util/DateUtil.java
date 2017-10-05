@@ -36,4 +36,5 @@ public class DateUtil {
         DateFormat df = new SimpleDateFormat(DateUtil.DATEFORMATCOMPLETE);
         return df.format(d);
     }
+            
 }

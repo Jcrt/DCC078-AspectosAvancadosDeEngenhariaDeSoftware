@@ -35,9 +35,8 @@ public class ProcessoDAO {
         }
         return instance;
     }
-    
-         
-     public void salvar(Processo model) throws SQLException, ClassNotFoundException {
+
+    public void salvar(Processo model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -64,31 +63,24 @@ public class ProcessoDAO {
             closeResources(conn, ps);
         }
     }
-     
-    public void putNotificacoesEnvolvidos(Processo p) throws SQLException, ClassNotFoundException{
-        Connection conn = null;
-        PreparedStatement ps = null;
 
+    public void putNotificacoesEnvolvidos(Processo p) throws SQLException, ClassNotFoundException {
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "INSERT INTO envolvidoNotificacaoProcesso (processo_id, pessoa_id, mensagem, data) "
-                       + " VALUES (?,?,?,?);";
-            
-            for(Observer ev : p.getEnvolvidos()){
+            for (Observer ev : p.getEnvolvidos()) {
                 EnvolvimentoProcesso e = (EnvolvimentoProcesso) ev;
-                for(String msg : e.getNotificacoes()){
-                    ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    ps.setInt(1, p.getId());
-                    ps.setInt(2, e.getPessoaEnvolvimento().getId());
-                    ps.setString(3, msg);
-                    ps.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
-                    ps.executeUpdate();
+                for (String msg : e.getNotificacoes()) {
+
+                    EnvolvimentoProcesso env = new EnvolvimentoProcesso();
+                    env.setIdProcesso(p.getId());
+                    env.setPessoaEnvolvimento(e.getPessoaEnvolvimento());
+
+                    envolvimento.salvar(env, msg);
                 }
             }
         } catch (SQLException e) {
             throw e;
         } finally {
-            closeResources(conn, ps);
+
         }
     }
 
