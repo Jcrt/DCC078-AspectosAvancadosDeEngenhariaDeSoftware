@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Enum.StatusEnum;
 import Enum.TipoEnvolvimentoEnum;
 import java.util.Observable;
 import java.util.Observer;
@@ -71,6 +72,14 @@ public class EnvolvimentoProcesso implements Observer {
     
     @Override
     public void update(Observable processo, Object arg) {
-        System.out.println("teste");
+        String msg = "";
+        Processo p = (Processo) processo;
+        if(arg instanceof StatusEnum){
+            msg = "O Status do processo " + p.getNumeroProcesso() + " fol alterado para " + arg.toString();
+        } else if(arg instanceof Andamento){
+            msg = "Um andamento foi inserido no processo " + p.getNumeroProcesso() + ". [\""+ ((Andamento) arg).getDescricao().substring(1, 30) + "...\"]";
+        }
+        
+        System.out.println(msg);
     }
 }

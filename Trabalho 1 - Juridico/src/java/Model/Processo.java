@@ -40,7 +40,7 @@ public class Processo extends Observable {
     public void addAndamento(Andamento a){
         this.andamentos.add(a);
         setChanged();
-        notifyObservers();
+        notifyObservers(a);
     }
 
     public void setId(int id) {
@@ -70,7 +70,7 @@ public class Processo extends Observable {
     public void setStatus(StatusEnum status) {
         this.status = status;
         setChanged();
-        notifyObservers();
+        notifyObservers(status);
     }
 
     public List<Andamento> getAndamentos() {
