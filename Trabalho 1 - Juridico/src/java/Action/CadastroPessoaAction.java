@@ -33,13 +33,13 @@ public class CadastroPessoaAction implements Action {
         String nome = request.getParameter("txtNome");
         String documento = request.getParameter("txtDocumento");
         String email = request.getParameter("txtEmail");
-        int tipoE = Integer.parseInt(request.getParameter("tipo"));
+        String tipoE =request.getParameter("txtTipoPessoa");
 
-        if (nome.equals("")) {
+        if (nome.equals("") || tipoE.equals("")) {
             response.sendRedirect("Pessoa/Formulario.jsp");
         } else {
             try {
-                TipoPessoaEnum tipo = TipoPessoaEnum.getTipoPessoaDeInt(tipoE);
+                TipoPessoaEnum tipo = TipoPessoaEnum.getTipoPessoaDeInt( Integer.parseInt(tipoE));
 
                 switch (tipo) {
                     case ADVOGADO: { 

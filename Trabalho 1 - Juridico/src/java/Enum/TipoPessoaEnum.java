@@ -5,6 +5,10 @@
  */
 package Enum;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author thassya
@@ -16,6 +20,17 @@ public enum TipoPessoaEnum {
     OUTROS(4);
 
     private final int valor;
+    private static final Map<Integer, TipoPessoaEnum> lista = new HashMap<Integer, TipoPessoaEnum>();
+
+    static {
+        for (TipoPessoaEnum s : EnumSet.allOf(TipoPessoaEnum.class)) {
+            lista.put(s.getValor(), s);
+        }
+    }
+
+    public static Map<Integer, TipoPessoaEnum> listaTodos() {
+        return lista;
+    }
 
     TipoPessoaEnum(int valor) {
         this.valor = valor;
