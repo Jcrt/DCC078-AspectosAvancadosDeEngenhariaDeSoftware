@@ -12,7 +12,11 @@ import Enum.TipoPessoaEnum;
  * @author 07228620674
  */
 public class PessoaOutro extends Pessoa {
-
+    
+    public PessoaOutro(int id, String nome) {
+        super(id, nome);
+    }
+    
     @Override
     public String getTipoDocumento() {
         return "RG: ";

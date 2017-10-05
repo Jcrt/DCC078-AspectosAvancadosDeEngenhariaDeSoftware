@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistencia;
+package Interface;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  * @author thassya
  */
-public interface PessoaDAO<T> {
+public interface IPessoaDAO<T> {
     public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;    
 }
 

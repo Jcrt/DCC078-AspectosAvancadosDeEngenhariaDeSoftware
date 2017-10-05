@@ -14,28 +14,20 @@ import Interface.IPessoa;
 public abstract class Pessoa implements IPessoa {
     private int id;
     private String nome;
-    private String tipoDocumento;
     private String numeroDocumento;
     private String email;
-    private int tipo;
+    
+    @Override
+    public abstract int getTipo();
     
     public Pessoa(){
         
     }
     
-    public Pessoa(int id, String nome, String tipoDocumento){
+    public Pessoa(int id, String nome){
         this();
         this.id = id;
         this.nome = nome;
-        this.tipoDocumento = tipoDocumento;
-    }
-
-     public Pessoa(int id, String nome, String tipoDocumento, int tipo){
-        this();
-        this.id = id; 
-        this.nome = nome;
-        this.tipoDocumento = tipoDocumento;
-        this.tipo =tipo;
     }
      
     public int getId() {
@@ -68,5 +60,10 @@ public abstract class Pessoa implements IPessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }    
+    }
+    
+    @Override
+    public String getTipoDocumento(){
+        return "CPF: ";
+    }
 }

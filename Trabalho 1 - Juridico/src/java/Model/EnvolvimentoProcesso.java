@@ -68,7 +68,6 @@ public class EnvolvimentoProcesso implements Observer {
     public void setIdProcesso(int idProcesso) {
         this.idProcesso = idProcesso;
     }
-
     
     @Override
     public void update(Observable processo, Object arg) {

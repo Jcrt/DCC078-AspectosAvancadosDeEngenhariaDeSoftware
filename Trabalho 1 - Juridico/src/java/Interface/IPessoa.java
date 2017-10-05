@@ -5,8 +5,6 @@
  */
 package Interface;
 
-import Enum.TipoEnvolvimentoEnum;
-
 /**
  *
  * @author 07228620674

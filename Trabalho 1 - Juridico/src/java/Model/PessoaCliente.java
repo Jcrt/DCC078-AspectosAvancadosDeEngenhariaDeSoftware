@@ -13,6 +13,10 @@ import Enum.TipoPessoaEnum;
  */
 public class PessoaCliente extends Pessoa {
 
+    public PessoaCliente(int id, String nome) {
+        super(id, nome);
+    }
+
     @Override
     public String getTipoDocumento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

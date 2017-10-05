@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import Interface.IPessoaDAO;
 import Model.PessoaContrario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import java.sql.Statement;
  *
  * @author thassya
  */
-public class PessoaContrarioDAO implements PessoaDAO<PessoaContrario>{
+public class PessoaContrarioDAO implements IPessoaDAO<PessoaContrario>{
 
     private static PessoaContrarioDAO instance;
 
