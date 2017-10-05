@@ -13,6 +13,10 @@ import Enum.TipoPessoaEnum;
  */
 public class PessoaAdvogado extends Pessoa {
 
+    public PessoaAdvogado() {
+    }
+
+    
     public PessoaAdvogado(int id, String nome) {
         super(id, nome);
     }

@@ -13,6 +13,9 @@ import Enum.TipoPessoaEnum;
  */
 public class PessoaOutro extends Pessoa {
 
+    public PessoaOutro() {
+    }
+
     public PessoaOutro(int id, String nome) {
         super(id, nome);
     }

@@ -10,19 +10,27 @@ package Enum;
  * @author thassya
  */
 public enum TipoPessoaEnum {
-    ADVOGADO(1), 
-    CLIENTE(2), 
-    CONTRARIO(3), 
+    ADVOGADO(1),
+    CLIENTE(2),
+    CONTRARIO(3),
     OUTROS(4);
-    
+
     private final int valor;
-    
-    TipoPessoaEnum(int valor){
+
+    TipoPessoaEnum(int valor) {
         this.valor = valor;
     }
-    
-    public int getValor()
-    {
+
+    public int getValor() {
         return valor;
+    }
+
+    public static TipoPessoaEnum getTipoPessoaDeInt(int tipo) {
+        for (TipoPessoaEnum e : values()) {
+            if (e.getValor() == tipo) {
+                return e;
+            }
+        }
+        return null;
     }
 }
