@@ -47,8 +47,8 @@
             Escolha o tipo:
             <select id="comboTipoPessoa" name="txtTipoPessoa">
                 <option value="">..</option>
-                <c:forEach var="empresa" items="${bean.lista}">
-                    <option value="${lista.id}">${lista.descricao}</option>
+                <c:forEach var="empresa" items="${bean.tipoPessoa}">
+                    <!--<option value="${tipoPessoa.id}">${tipoPessoa.descricao}</option>-->
                 </c:forEach>
             </select>
             <input type="submit" value="Cadastrar"/>

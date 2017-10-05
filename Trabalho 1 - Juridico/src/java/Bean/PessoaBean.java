@@ -15,8 +15,8 @@ import java.util.Map;
  */
 public class PessoaBean {
     public Map<Integer, TipoPessoaEnum> getTipoPessoa() throws ClassNotFoundException, SQLException {
-        Map<Integer, TipoPessoaEnum> lista = TipoPessoaEnum.listaTodos();
-        return lista;       
+        Map<Integer, TipoPessoaEnum> tipoPessoa = TipoPessoaEnum.listaTodos();
+        return tipoPessoa;       
     }
     
 }
