@@ -27,6 +27,7 @@ CREATE TABLE ` pessoa` (
   `nome` varchar(200) COLLATE latin1_general_ci NOT NULL,
   `numerodocumento` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
   `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `tipo` int(11) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
