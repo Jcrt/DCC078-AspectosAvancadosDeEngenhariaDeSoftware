@@ -7,15 +7,16 @@ package Bean;
 
 import Enum.TipoPessoaEnum;
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
  * @author thassya
  */
 public class PessoaBean {
-    public Map<Integer, TipoPessoaEnum> getTipoPessoa() throws ClassNotFoundException, SQLException {
-        Map<Integer, TipoPessoaEnum> tipoPessoa = TipoPessoaEnum.listaTodos();
+    public ArrayList<TipoPessoaEnum>  getTipoPessoa() throws ClassNotFoundException, SQLException {
+        ArrayList<TipoPessoaEnum> tipoPessoa = new ArrayList<TipoPessoaEnum>();
+        tipoPessoa = TipoPessoaEnum.listaTodos();
         return tipoPessoa;       
     }
     

@@ -16,24 +16,22 @@ public class PessoaCliente extends Pessoa {
     public PessoaCliente() {
     }
 
-    
     public PessoaCliente(int id, String nome) {
         super(id, nome);
     }
-    
-    
+
     public PessoaCliente(int id, String nome, String documento, String email) {
         super(id, nome, documento, email);
     }
 
     @Override
     public String getTipoDocumento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "RG: ";
     }
 
     @Override
     public int getTipo() {
         return TipoPessoaEnum.CLIENTE.getValor();
     }
-    
+
 }

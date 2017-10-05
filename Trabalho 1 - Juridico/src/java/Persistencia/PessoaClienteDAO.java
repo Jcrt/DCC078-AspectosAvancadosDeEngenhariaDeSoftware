@@ -67,7 +67,7 @@ public class PessoaClienteDAO implements IPessoaDAO<PessoaCliente> {
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "UPDATE pessoa SETnome = ?, tipoDocumento = ?, numeroDocumento =?, email = ?, tipo = ? WHERE id = ?";
+            String sql = "UPDATE pessoa SET nome = ?, tipoDocumento = ?, numeroDocumento =?, email = ?, tipo = ? WHERE id = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, model.getNome());
             ps.setString(2, model.getTipoDocumento());

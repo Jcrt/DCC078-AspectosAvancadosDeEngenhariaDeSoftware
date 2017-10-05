@@ -5,6 +5,7 @@
  */
 package Enum;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,19 +20,26 @@ public enum TipoPessoaEnum {
     CONTRARIO(3),
     OUTROS(4);
 
-    private final int valor;
-    private static final Map<Integer, TipoPessoaEnum> lista = new HashMap<Integer, TipoPessoaEnum>();
+    private final int valor;    
+    private static final ArrayList<TipoPessoaEnum> lista = new ArrayList<TipoPessoaEnum>();
+    
+//    private static final Map<Integer, TipoPessoaEnum> map = new HashMap<Integer, TipoPessoaEnum>();
+//    static {
+//        for (TipoPessoaEnum s : EnumSet.allOf(TipoPessoaEnum.class)) {
+//            map.put(s.getValor(), s);
+//        }
+//    }    
+//    public static Map<Integer, TipoPessoaEnum> mapTodos() {
+//        return map;
+//    }
 
-    static {
-        for (TipoPessoaEnum s : EnumSet.allOf(TipoPessoaEnum.class)) {
-            lista.put(s.getValor(), s);
+    public static ArrayList<TipoPessoaEnum> listaTodos(){
+        for (TipoPessoaEnum e : values()) {
+            lista.add(e);
         }
-    }
-
-    public static Map<Integer, TipoPessoaEnum> listaTodos() {
         return lista;
     }
-
+    
     TipoPessoaEnum(int valor) {
         this.valor = valor;
     }

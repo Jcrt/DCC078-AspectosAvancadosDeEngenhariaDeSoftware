@@ -19,7 +19,10 @@
             .menu li {position:relative; float:left; border-right:1px solid #c0c0c0; }
             .menu li a {color:#333; text-decoration:none; padding:5px 10px; display:block;}
             .menu li a:hover{background:#333; color:#fff; -moz-box-shadow:0 3px 10px 0 #CCC; -webkit-box-shadow:0 3px 10px 0 #ccc; text-shadow:0px 0px 5px #fff;}
-            nav {padding: 20;}   
+            nav {padding: 20;}  
+            h1 {padding: 10px; margin-top: 50px; display:block;}
+            input[type=text], select { width: 100%; padding: 12px 20px; margin: 8px 0;  display: inline-block;}
+            input[type=submit] {padding: 14px 20px;margin: 8px 0;border: none; cursor: pointer; background-color:#c0c0c0;}
         </style>
     </head>
     <body>
@@ -32,7 +35,8 @@
                     <li><a href=''>Primos</a></li>
                 </ul>
             </nav> 
-            
+            <br>
+            <br>
             <h1>Cadastro de Pessoa</h1>
         <form action="../FrontController?action=CadastroPessoa" method="post">
             Entre com seu Nome:
@@ -47,10 +51,11 @@
             Escolha o tipo:
             <select id="comboTipoPessoa" name="txtTipoPessoa">
                 <option value="">..</option>
-                <c:forEach var="empresa" items="${bean.tipoPessoa}">
-                    <!--<option value="${tipoPessoa.id}">${tipoPessoa.descricao}</option>-->
+                <c:forEach var="tipoPessoa" items="${bean.tipoPessoa}">
+                    <option value="${tipoPessoa.valor}">${tipoPessoa}</option>
                 </c:forEach>
             </select>
+            <br>
             <input type="submit" value="Cadastrar"/>
         </form>
         </div>

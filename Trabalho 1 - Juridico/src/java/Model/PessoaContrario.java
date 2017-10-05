@@ -15,24 +15,23 @@ public class PessoaContrario extends Pessoa {
 
     public PessoaContrario() {
     }
-    
-    
+
     public PessoaContrario(int id, String nome) {
         super(id, nome);
     }
-    
-     public PessoaContrario(int id, String nome, String documento, String email) {
+
+    public PessoaContrario(int id, String nome, String documento, String email) {
         super(id, nome, documento, email);
     }
-     
+
     @Override
     public String getTipoDocumento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "RG: ";
     }
 
     @Override
     public int getTipo() {
         return TipoPessoaEnum.CONTRARIO.getValor();
     }
-    
+
 }
