@@ -16,6 +16,11 @@ public class PessoaCliente extends Pessoa {
     public PessoaCliente(int id, String nome) {
         super(id, nome);
     }
+    
+    
+    public PessoaCliente(int id, String nome, String documento, String email) {
+        super(id, nome, documento, email);
+    }
 
     @Override
     public String getTipoDocumento() {

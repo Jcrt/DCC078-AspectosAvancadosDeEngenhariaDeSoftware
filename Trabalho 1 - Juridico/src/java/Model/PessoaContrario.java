@@ -17,6 +17,10 @@ public class PessoaContrario extends Pessoa {
         super(id, nome);
     }
     
+     public PessoaContrario(int id, String nome, String documento, String email) {
+        super(id, nome, documento, email);
+    }
+     
     @Override
     public String getTipoDocumento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

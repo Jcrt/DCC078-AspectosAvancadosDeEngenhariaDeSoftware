@@ -12,24 +12,33 @@ import Interface.IPessoa;
  * @author 07228620674
  */
 public abstract class Pessoa implements IPessoa {
+
     private int id;
     private String nome;
     private String numeroDocumento;
     private String email;
-    
+
     @Override
     public abstract int getTipo();
-    
-    public Pessoa(){
-        
+
+    public Pessoa() {
+
     }
-    
-    public Pessoa(int id, String nome){
+
+    public Pessoa(int id, String nome) {
         this();
         this.id = id;
         this.nome = nome;
     }
-     
+
+    public Pessoa(int id, String nome, String numeroDocumento, String email) {
+        this();
+        this.id = id;
+        this.nome = nome;
+        this.numeroDocumento = numeroDocumento;
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,7 +54,7 @@ public abstract class Pessoa implements IPessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public String getNumeroDocumento() {
         return numeroDocumento;
     }
@@ -61,9 +70,9 @@ public abstract class Pessoa implements IPessoa {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @Override
-    public String getTipoDocumento(){
+    public String getTipoDocumento() {
         return "CPF: ";
     }
 }

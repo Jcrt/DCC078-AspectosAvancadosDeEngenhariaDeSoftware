@@ -6,13 +6,17 @@
 package Interface;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author thassya
  */
 public interface IPessoaDAO<T> {
-    public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;    
+
+    public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;
+
+    public abstract void atualizar(T objeto) throws SQLException, ClassNotFoundException;
+
+    public abstract List<T> listar() throws ClassNotFoundException, SQLException;
 }
-
-

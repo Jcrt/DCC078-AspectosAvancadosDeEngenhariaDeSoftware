@@ -17,6 +17,10 @@ public class PessoaAdvogado extends Pessoa {
         super(id, nome);
     }
     
+     public PessoaAdvogado(int id, String nome, String numeroDocumento, String email) {
+        super(id, nome, numeroDocumento,email);
+    }
+    
     @Override
     public String getTipoDocumento() {
         return "OAB"; 
