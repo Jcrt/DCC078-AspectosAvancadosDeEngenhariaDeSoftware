@@ -32,6 +32,11 @@ public class Processo extends Observable {
         this.status = StatusEnum.ATIVO;
     }
     
+    public Processo(String numProc){
+        this();
+        this.numeroProcesso = numProc;
+    }
+    
     public void addEnvolvido(Observer p){
         this.envolvidos.add(p);
         this.addObserver(p);
@@ -45,6 +50,10 @@ public class Processo extends Observable {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getId(){
+        return this.id;
     }
 
     public String getNumeroProcesso() {

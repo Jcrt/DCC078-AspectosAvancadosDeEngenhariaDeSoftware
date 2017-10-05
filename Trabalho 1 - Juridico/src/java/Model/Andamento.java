@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Util.DateUtil;
 import java.sql.Date;
 
 /**
@@ -21,11 +22,17 @@ public abstract class Andamento {
     public abstract String getLeitoresAndamento();
 
     public String getStatusLido() {
-        return "[Data: " + Date.valueOf(data.toString()) + "] - " + getLeitoresAndamento();
+        return "[Data: " + DateUtil.GetFormattedDate(data) + "] - " + getLeitoresAndamento();
     }
 
     public Andamento() {
-
+        
+    }
+    
+    public Andamento(String descricao){
+        this();
+        this.descricao = descricao;
+        this.data = new Date(new java.util.Date().getTime());
     }
 
     public Andamento(int id, String descricao, Date data) {

@@ -7,6 +7,8 @@ package Model;
 
 import Enum.StatusEnum;
 import Enum.TipoEnvolvimentoEnum;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,12 +18,13 @@ import java.util.Observer;
  */
 public class EnvolvimentoProcesso implements Observer {
     private int id;
+    private int idProcesso;
     private Pessoa pessoaEnvolvimento;
     private TipoEnvolvimentoEnum tipoEnvolvimento;
-    private int idProcesso;
+    private List<String> notificacoes;
     
     public EnvolvimentoProcesso(){
-        
+        this.notificacoes = new ArrayList<>();
     }
     
     public EnvolvimentoProcesso(int id, Pessoa p, TipoEnvolvimentoEnum tipo){
@@ -70,6 +73,14 @@ public class EnvolvimentoProcesso implements Observer {
         this.idProcesso = idProcesso;
     }
     
+    public void addNotificacoes(String not){
+        this.notificacoes.add(not);
+    }
+    
+    public List<String> getNotificacoes(){
+        return this.notificacoes;
+    }
+    
     @Override
     public void update(Observable processo, Object arg) {
         String msg = "";
@@ -77,9 +88,13 @@ public class EnvolvimentoProcesso implements Observer {
         if(arg instanceof StatusEnum){
             msg = "O Status do processo " + p.getNumeroProcesso() + " fol alterado para " + arg.toString();
         } else if(arg instanceof Andamento){
-            msg = "Um andamento foi inserido no processo " + p.getNumeroProcesso() + ". [\""+ ((Andamento) arg).getDescricao().substring(1, 30) + "...\"]";
+            Andamento anda = (Andamento)arg;
+            String strMsg = anda.getDescricao().length() < 30 ? anda.getDescricao() : anda.getDescricao().substring(0, 30);
+            msg = "Um andamento foi inserido no processo " + p.getNumeroProcesso() + ". [\""+ strMsg + "...\"]";
         }
         
-        System.out.println(msg);
+        if(msg.length() > 0){
+            this.addNotificacoes(msg);
+        }
     }
 }

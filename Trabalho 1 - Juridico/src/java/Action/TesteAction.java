@@ -8,7 +8,11 @@ package Action;
 import Enum.StatusEnum;
 import Enum.TipoEnvolvimentoEnum;
 import Model.*;
+import Persistencia.ProcessoDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,18 +24,29 @@ public class TesteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Processo p = new Processo();
+        Processo p = new Processo("2013.009.22.1223.122.22");
         
         Pessoa p1 = new PessoaAdvogado(1, "Advogado");
         Pessoa p2 = new PessoaCliente(2, "Cliente");
         
         EnvolvimentoProcesso e1 = new EnvolvimentoProcesso(1, p1, TipoEnvolvimentoEnum.ADVOGADO);
         EnvolvimentoProcesso e2 = new EnvolvimentoProcesso(2, p2, TipoEnvolvimentoEnum.CLIENTE);
+        
+        Andamento a = new AndamentoNaoLido("Teste de andamento que tem que ter mais de 30 caracteres para eu ver se os pontinhos vão ser adicionados");
 
         p.addEnvolvido(e1);
         p.addEnvolvido(e2);
         
         p.setStatus(StatusEnum.ATIVO);
+        p.addAndamento(a);
         
+        ProcessoDAO pDAO = ProcessoDAO.getInstance();
+        try {
+            pDAO.putNotificacoesEnvolvidos(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(TesteAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TesteAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }   
 }

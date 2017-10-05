@@ -11,6 +11,10 @@ package Model;
  */
 public class AndamentoNaoLido extends Andamento {
 
+    public AndamentoNaoLido(String descricao) {
+        super(descricao);
+    }
+
     @Override
     public String getLeitoresAndamento() {
         return "Nenhum envolvido leu este andamento até o momento";
