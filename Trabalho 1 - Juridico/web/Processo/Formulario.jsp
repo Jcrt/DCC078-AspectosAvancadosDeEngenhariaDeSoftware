@@ -46,7 +46,7 @@
                 <select id="comboAdvogado" name="txtAdvogado">
                     <option value="">..</option>
                     <c:forEach var="tipoPessoa" items="${bean.advogados}">
-                        <option value="${advogados.id}">${advogados.nome}</option>
+                        <option value="${tipoPessoa.id}">${tipoPessoa.nome}</option>
                     </c:forEach>
                 </select>
                 <br>

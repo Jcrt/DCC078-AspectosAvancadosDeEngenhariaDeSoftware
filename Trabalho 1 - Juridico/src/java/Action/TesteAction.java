@@ -24,7 +24,7 @@ public class TesteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Processo p = new Processo("2013.009.22.1223.122.22");
+        Processo processo = new Processo("2013.009.22.1223.122.22");
         
         Pessoa p1 = new PessoaAdvogado(1, "Advogado");
         Pessoa p2 = new PessoaCliente(2, "Cliente");
@@ -34,15 +34,15 @@ public class TesteAction implements Action {
         
         Andamento a = new AndamentoNaoLido("Teste de andamento que tem que ter mais de 30 caracteres para eu ver se os pontinhos vão ser adicionados");
 
-        p.addEnvolvido(e1);
-        p.addEnvolvido(e2);
+        processo.addEnvolvido(e1);
+        processo.addEnvolvido(e2);
         
-        p.setStatus(StatusEnum.ATIVO);
-        p.addAndamento(a);
+        processo.setStatus(StatusEnum.ATIVO);
+        processo.addAndamento(a);
         
         ProcessoDAO pDAO = ProcessoDAO.getInstance();
         try {
-            pDAO.putNotificacoesEnvolvidos(p);
+            pDAO.putNotificacoesEnvolvidos(processo);
         } catch (SQLException ex) {
             Logger.getLogger(TesteAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

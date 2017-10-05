@@ -23,6 +23,17 @@ ALTER TABLE processo
 ADD CONSTRAINT processo_pessoa_id_fk
 FOREIGN KEY (advogado) REFERENCES pessoa (id);
 
+
+CREATE TABLE andamento
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idProcesso INT,
+    descricao VARCHAR(200),
+    data DATETIME,
+    CONSTRAINT andamento_processo_id_fk FOREIGN KEY (idProcesso) REFERENCES processo (id)
+);
+
+
 create table envolvidoNotificacaoProcesso
 (
 	processo_id int null,
