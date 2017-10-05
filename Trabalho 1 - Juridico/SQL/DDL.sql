@@ -50,3 +50,22 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-09-30 18:23:15
+
+
+
+create table envolvidoNotificacaoProcesso
+(
+	processo_id int null,
+	pessoa_id int null,
+	mensagem varchar(200) null,
+	data datetime null,
+	constraint envolvidoNotificacaoProcesso_ pessoa_id_fk
+		foreign key (pessoa_id) references ` pessoa` (id)
+)
+;
+
+create index `envolvidoNotificacaoProcesso_ pessoa_id_fk`
+	on envolvidoNotificacaoProcesso (pessoa_id)
+;
+
+
