@@ -6,8 +6,11 @@
 package Bean;
 
 import Enum.TipoPessoaEnum;
+import Model.PessoaAdvogado;
+import Persistencia.PessoaAdvogadoDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,4 +23,9 @@ public class PessoaBean {
         return tipoPessoa;       
     }
     
+    public List<PessoaAdvogado> getAdvogados() throws ClassNotFoundException, SQLException{
+        List<PessoaAdvogado> advogados = new ArrayList<PessoaAdvogado>();
+        advogados = PessoaAdvogadoDAO.getInstance().listar();
+        return advogados;       
+    }
 }

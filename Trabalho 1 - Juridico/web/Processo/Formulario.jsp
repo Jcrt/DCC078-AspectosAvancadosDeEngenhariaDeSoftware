@@ -4,7 +4,7 @@
     Author     : thassya
 --%>
 
-
+<jsp:useBean id="bean" class="Bean.PessoaBean" scope="page"/>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
         </style>
     </head>
     <body>
-          <div id="conteudo">
+        <div id="conteudo">
             <nav>
                 <ul class=menu>
                     <li><a href="FrontController?action=Teste">Clique aqui, abestado</a></li>
@@ -39,20 +39,14 @@
             <br>
             <h1>Cadastro de Processo</h1>
             <form action="../FrontController?action=CadastroProcesso" method="post">
-                Entre com seu Nome:
-                <input type="text" name="txtNome"/><br/>
+                Entre com Número do Processo:
+                <input type="text" name="txtNumeroProcesso"/><br/>
 
-                Entre com seu Documento: 
-                <input type="text" name="txtDocumento"/><br/>
-
-                Entre com seu Email:
-                <input type="text" name="txtEmail"/><br/>
-
-                Escolha o tipo:
-                <select id="comboTipoPessoa" name="txtTipoPessoa">
+                Vincule um Advogado:
+                <select id="comboAdvogado" name="txtAdvogado">
                     <option value="">..</option>
-                    <c:forEach var="tipoPessoa" items="${bean.tipoPessoa}">
-                        <option value="${tipoPessoa.valor}">${tipoPessoa}</option>
+                    <c:forEach var="tipoPessoa" items="${bean.advogados}">
+                        <option value="${advogados.id}">${advogados.nome}</option>
                     </c:forEach>
                 </select>
                 <br>

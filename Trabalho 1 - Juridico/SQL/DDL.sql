@@ -18,6 +18,11 @@ CREATE TABLE processo
     dataEncerramento DATETIME
 );
 
+ALTER TABLE processo ADD advogado INT NULL;
+ALTER TABLE processo
+ADD CONSTRAINT processo_pessoa_id_fk
+FOREIGN KEY (advogado) REFERENCES pessoa (id);
+
 create table envolvidoNotificacaoProcesso
 (
 	processo_id int null,

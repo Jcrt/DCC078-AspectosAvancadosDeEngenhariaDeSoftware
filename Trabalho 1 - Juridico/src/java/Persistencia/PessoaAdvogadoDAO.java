@@ -111,6 +111,32 @@ public class PessoaAdvogadoDAO implements IPessoaDAO<PessoaAdvogado> {
         return lista;
     }
 
+    public PessoaAdvogado getPessoa(int id) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.prepareStatement("SELECT * FROM pessoa WHERE id = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return new PessoaAdvogado(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("numeroDocumento"),
+                        rs.getString("email")
+                );
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        return null;
+    }
+    
     private void closeResources(Connection conn, Statement ps) {
         try {
             if (ps != null) {
