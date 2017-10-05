@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.Observable;
 public class Processo extends Observable {
     private int id;
     private String numeroProcesso;
-    private List<EnvolvimentoProcesso> envolvidos; 
+    private List<Observer> envolvidos; 
     private StatusEnum status;
     private List<Andamento> andamentos;
     private Date dataCadastro;
@@ -31,8 +32,9 @@ public class Processo extends Observable {
         this.status = StatusEnum.ATIVO;
     }
     
-    public void addEnvolvido(EnvolvimentoProcesso p){
+    public void addEnvolvido(Observer p){
         this.envolvidos.add(p);
+        this.addObserver(p);
     }
     
     public void addAndamento(Andamento a){
@@ -53,11 +55,11 @@ public class Processo extends Observable {
         this.numeroProcesso = numeroProcesso;
     }
 
-    public List<EnvolvimentoProcesso> getEnvolvidos() {
+    public List<Observer> getEnvolvidos() {
         return envolvidos;
     }
 
-    public void setEnvolvidos(List<EnvolvimentoProcesso> envolvidos) {
+    public void setEnvolvidos(List<Observer> envolvidos) {
         this.envolvidos = envolvidos;
     }
 
