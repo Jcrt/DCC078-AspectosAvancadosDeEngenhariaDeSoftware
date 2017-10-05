@@ -32,7 +32,7 @@
                 <ul class=menu>
                     <li><a href="FrontController?action=Teste">Clique aqui, abestado</a></li>
                     <li><a href='Pessoa/Formulario.jsp'>Pessoas</a></li>
-                    <li><a href=''>Processos</a></li>
+                    <li><a href='Processo/Formulario.jsp'>Processos</a></li>
                     <li><a href=''>Primos</a></li>
                 </ul>
             </nav> 

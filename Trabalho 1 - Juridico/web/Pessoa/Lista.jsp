@@ -1,8 +1,9 @@
 <%-- 
-    Document   : Formulario
-    Created on : 05/10/2017, 14:43:50
+    Document   : Lista
+    Created on : 05/10/2017, 17:12:00
     Author     : thassya
 --%>
+
 <jsp:useBean id="bean" class="Bean.PessoaBean" scope="page"/>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -11,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro Pessoas</title>
+        <title>Pessoas</title>
         <style>
             html {background-color: #ddd;}
             #conteudo { margin-left: 50px; width: 50%; }
@@ -30,34 +31,29 @@
             <nav>
                 <ul class=menu>
                     <li><a href="FrontController?action=Teste">Clique aqui, abestado</a></li>
-                   <li><a href='Pessoa/Formulario.jsp'>Pessoas</a></li>
-                    <li><a href='Processo/Formulario.jsp'>Processos</a></li>
+                    <li><a href=''>Pessoas</a></li>
+                    <li><a href=''>Processos</a></li>
                     <li><a href=''>Primos</a></li>
                 </ul>
             </nav> 
             <br>
             <br>
-            <h1>Cadastro de Pessoa</h1>
-            <form action="../FrontController?action=CadastroPessoa" method="post">
-                Entre com seu Nome:
-                <input type="text" name="txtNome"/><br/>
-
-                Entre com seu Documento: 
-                <input type="text" name="txtDocumento"/><br/>
-
-                Entre com seu Email:
-                <input type="text" name="txtEmail"/><br/>
-
-                Escolha o tipo:
-                <select id="comboTipoPessoa" name="txtTipoPessoa">
-                    <option value="">..</option>
-                    <c:forEach var="tipoPessoa" items="${bean.tipoPessoa}">
-                        <option value="${tipoPessoa.valor}">${tipoPessoa}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <input type="submit" value="Cadastrar"/>
-            </form>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Documento</th>
+                    <th>Email</th>
+                </tr>
+                <c:forEach var="pessoa" items="${listaPessoas}">
+                    <tr>
+                        <td>${tipoPessoa.valor}</td>
+                        <td>${tipoPessoa.tipo}</td>
+                        <td>${tipoPessoa.documento}</td>
+                        <td>${tipoPessoa.email}</td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </body>
 </html>

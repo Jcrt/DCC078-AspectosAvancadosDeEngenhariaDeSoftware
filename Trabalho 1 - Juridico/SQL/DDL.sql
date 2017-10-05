@@ -8,6 +8,16 @@ CREATE TABLE pessoa
     tipo INT NOT NULL
 );
 
+CREATE TABLE processo
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    numeroProcesso VARCHAR(50),
+    status INT,
+    dataCadastro DATETIME,
+    dataBaixa DATETIME,
+    dataEncerramento DATETIME
+);
+
 create table envolvidoNotificacaoProcesso
 (
 	processo_id int null,
@@ -22,5 +32,7 @@ create table envolvidoNotificacaoProcesso
 create index `envolvidoNotificacaoProcesso_ pessoa_id_fk`
 	on envolvidoNotificacaoProcesso (pessoa_id)
 ;
+
+
 
 
