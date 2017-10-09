@@ -12,4 +12,12 @@ package Interface;
 public interface IPessoa {
     String getTipoDocumento();
     int getTipo();
+
+    public String getNome();
+
+    public String getEmail();
+
+    public String getNumeroDocumento();
+
+    public int getId();
 }

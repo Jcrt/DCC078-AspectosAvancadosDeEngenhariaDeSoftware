@@ -39,6 +39,7 @@ public abstract class Pessoa implements IPessoa {
         this.email = email;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -47,6 +48,7 @@ public abstract class Pessoa implements IPessoa {
         this.id = id;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
@@ -55,6 +57,7 @@ public abstract class Pessoa implements IPessoa {
         this.nome = nome;
     }
 
+    @Override
     public String getNumeroDocumento() {
         return numeroDocumento;
     }
@@ -63,6 +66,7 @@ public abstract class Pessoa implements IPessoa {
         this.numeroDocumento = numeroDocumento;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

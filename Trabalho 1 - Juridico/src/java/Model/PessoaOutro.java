@@ -33,5 +33,4 @@ public class PessoaOutro extends Pessoa {
     public int getTipo() {
         return TipoPessoaEnum.OUTROS.getValor();
     }
-
 }

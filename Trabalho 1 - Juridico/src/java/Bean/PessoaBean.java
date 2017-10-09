@@ -18,13 +18,13 @@ import java.util.List;
  */
 public class PessoaBean {
     public ArrayList<TipoPessoaEnum>  getTipoPessoa() throws ClassNotFoundException, SQLException {
-        ArrayList<TipoPessoaEnum> tipoPessoa = new ArrayList<TipoPessoaEnum>();
+        ArrayList<TipoPessoaEnum> tipoPessoa = new ArrayList<>();
         tipoPessoa = TipoPessoaEnum.listaTodos();
         return tipoPessoa;       
     }
     
     public List<PessoaAdvogado> getAdvogados() throws ClassNotFoundException, SQLException{
-        List<PessoaAdvogado> advogados = new ArrayList<PessoaAdvogado>();
+        List<PessoaAdvogado> advogados = new ArrayList<>();
         advogados = PessoaAdvogadoDAO.getInstance().listar();
         return advogados;       
     }
