@@ -14,7 +14,7 @@
         <nav>
             <ul class=menu>
                 <li><a href='<%=request.getContextPath() %>/index.jsp'>Inicio</a>
-                <li><a href='<%=request.getContextPath() %>/Pessoa/Formulario.jsp'>Pessoas</a></li>
+                <li><a href='FrontController?action=ListaProcessos'>Pessoas</a></li>
                 <li><a href='<%=request.getContextPath() %>/Processo/Formulario.jsp'>Processos</a></li>
             </ul>
         </nav> 

@@ -5,6 +5,8 @@
  */
 package Persistencia;
 
+import Enum.StatusEnum;
+import Enum.TipoEnvolvimentoEnum;
 import Model.EnvolvimentoProcesso;
 import Model.Processo;
 import java.sql.Connection;
@@ -12,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observer;
 
 /**
@@ -83,6 +87,40 @@ public class ProcessoDAO {
 
         }
     }
+    
+    public List<Processo> listar() throws ClassNotFoundException, SQLException{
+        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento "
+                    + "FROM Processo";
+        
+        List<Processo> lista = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = DatabaseLocator.getInstance().getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Processo model = new Processo(rs.getString("numeroProcesso"));
+                model.setId(rs.getInt("id"));
+                model.setStatus(StatusEnum.values()[rs.getInt("status")]);
+                model.setDataCadastro(rs.getDate("dataCadastro"));
+                model.setDataBaixa(rs.getDate("dataBaixa"));
+                model.setDataEncerramento(rs.getDate("dataEncerramento"));
+                model.setEnvolvidos(this.getEnvolvidosPorProcesso(model.getId()));
+                //model.setAndamentos(this.getAndamentosPorProcesso(model.getId()));
+                lista.add(model);
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, ps);
+        }
+        return lista;
+    }
 
     private void closeResources(Connection conn, Statement st) {
         try {
@@ -97,4 +135,37 @@ public class ProcessoDAO {
 
         }
     }
+
+    private List<Observer> getEnvolvidosPorProcesso(int id) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT processo_id, pessoa_id, EnvolvimentoProcessoEnum FROM envolvimentoprocesso";
+        
+        List<Observer> lista = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            conn = DatabaseLocator.getInstance().getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                EnvolvimentoProcesso model = new EnvolvimentoProcesso();
+                model.setIdProcesso(id);
+                model.setTipoEnvolvimento(TipoEnvolvimentoEnum.values()[rs.getInt("EnvolvimentoProcessoEnum")]);
+                model.setPessoaEnvolvimento(PessoaDAO.getInstance().getPessoaById(rs.getInt("pessoa_id")));
+                lista.add(model);
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, ps);
+        }
+        return lista;
+    }
+
+    /*private List<Andamento> getAndamentosPorProcesso(int id) {
+        
+    }*/
 }

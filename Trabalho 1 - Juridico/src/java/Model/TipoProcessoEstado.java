@@ -11,11 +11,8 @@ package Model;
  */
 public interface TipoProcessoEstado {
     public String getEstado();
-    
     public String ativo(TipoProcesso tipo);
     public String arquivado(TipoProcesso tipo);
     public String baixaProvisoria(TipoProcesso tipo);
     public String encerrado(TipoProcesso tipo);
-    
-    
 }

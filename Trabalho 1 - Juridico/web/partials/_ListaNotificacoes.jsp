@@ -13,7 +13,7 @@
 <html>
     <body>
         <div>
-            <h2>Notificações</h2>
+            <h2>Suas notificações</h2>
             <hr />
             <table>
                 <thead>

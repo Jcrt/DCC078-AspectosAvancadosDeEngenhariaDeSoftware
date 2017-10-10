@@ -9,6 +9,7 @@ import Enum.TipoPessoaEnum;
 import Interface.IPessoa;
 import Interface.IPessoaDAO;
 import Model.Notificacoes;
+import Model.Pessoa;
 import Model.PessoaAdvogado;
 import Model.PessoaCliente;
 import Model.PessoaContrario;
@@ -154,6 +155,37 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
         ps = con.prepareStatement(sql);
         ps.setString(1, login);
         ps.setString(2, senha);
+        
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            switch(rs.getInt("tipo")){
+                case 1:
+                    pessoa = new PessoaAdvogado(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                break;
+                case 2:
+                    pessoa = new PessoaCliente(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                break;
+                case 3:
+                    pessoa = new PessoaContrario(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                break;
+                case 4:
+                    pessoa = new PessoaOutro(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                break;
+            }
+        }
+        return pessoa;
+    }
+    
+    public Pessoa getPessoaById(int id) throws ClassNotFoundException, SQLException{
+        
+        Connection con = null;
+        PreparedStatement ps = null;
+        Pessoa pessoa = null;
+        String sql = "SELECT * FROM pessoa WHERE id = ?";
+        
+        con = DatabaseLocator.getInstance().getConnection();
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
         
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
