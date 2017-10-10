@@ -18,17 +18,12 @@
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-       <div id="conteudo">
+        <div id="conteudo">
+
+           <jsp:include page="partials/_Menu.jsp" /> 
             <h1>Bem vindo ao Controle de Processos, <%=request.getSession(true).getAttribute("nomePessoa")%>!</h1>
             <h2>A forma mais simples de controlar seus processos e notificar os envolvidos.</h2>
-            <nav>
-                <ul class=menu>
-                    <!-- <li><a href="FrontController?action=Teste">Clique aqui, abestado</a></li> -->
-                    <li><a href='Pessoa/Formulario.jsp'>Pessoas</a></li>
-                    <li><a href='Processo/Formulario.jsp'>Processos</a></li>
-                    <li><a href=''>Primos</a></li>
-                </ul>
-            </nav> 
+            
             <br/>
             <br/>
             <br/>

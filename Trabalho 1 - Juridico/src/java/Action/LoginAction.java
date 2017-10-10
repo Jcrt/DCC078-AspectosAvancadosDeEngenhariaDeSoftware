@@ -32,7 +32,7 @@ public class LoginAction implements Action {
         String login = (String) request.getParameter("login");
         String senha = (String) request.getParameter("senha");
         
-        if(!loggedIn && login != null && senha != null && !login.isEmpty() && !senha.isEmpty()){
+        if(login != null && senha != null && !login.isEmpty() && !senha.isEmpty()){
             PessoaDAO pDAO = PessoaDAO.getInstance();
             try {
                 IPessoa pessoa = pDAO.validaLogin(login.trim(), senha.trim());
@@ -55,9 +55,6 @@ public class LoginAction implements Action {
             } catch (SQLException ex) {
                 Logger.getLogger(LoginAction.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else if(loggedIn){
-            response.sendRedirect("index.jsp");
         }
         else{
             response.sendRedirect("login.jsp");
