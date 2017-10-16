@@ -5,8 +5,8 @@
  */
 package Action;
 
-import Model.Processo;
-import Persistencia.ProcessoDAO;
+import Interface.IPessoa;
+import Persistencia.PessoaDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,24 +21,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Julio R. Trindade
  */
-public class ListaProcessosAction implements Action {
+public class ListarPessoasAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ProcessoDAO pDAO = ProcessoDAO.getInstance();
-            List<Processo> listProc = pDAO.listar();
+            PessoaDAO pDAO = PessoaDAO.getInstance();
+            List<IPessoa> listaPessoas = pDAO.listarPessoas();
             
-            request.setAttribute("listaProcessos", listProc);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("Processo/listar.jsp");
+            request.setAttribute("listaPessoas", listaPessoas);
+            RequestDispatcher rd = request.getRequestDispatcher("Pessoa/Listar.jsp");
             rd.forward(request, response);
+            
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListaProcessosAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListarPessoasAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ListaProcessosAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListarPessoasAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException ex) {
-            Logger.getLogger(ListaProcessosAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListarPessoasAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

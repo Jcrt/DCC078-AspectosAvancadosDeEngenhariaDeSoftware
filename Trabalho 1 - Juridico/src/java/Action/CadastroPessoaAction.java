@@ -73,7 +73,7 @@ public class CadastroPessoaAction implements Action {
                     default: {System.out.println("Escolha um tipo de pessoa correto!"); break;}
                     
                 }
-                response.sendRedirect("Sucesso.jsp");                
+                response.sendRedirect("FrontController?action=ListarPessoas");                
                                
             } catch (SQLException e) {
                 response.sendRedirect("Erro.jsp");

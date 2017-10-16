@@ -5,11 +5,21 @@
  */
 package Persistencia;
 
+import Enum.StatusEnum;
 import Model.Andamento;
+import Model.AndamentoNaoLido;
+import Model.Processo;
+import Model.ProcessoArquivado;
+import Model.ProcessoAtivo;
+import Model.ProcessoBaixaProvisória;
+import Model.ProcessoEncerrado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -49,6 +59,37 @@ public class AndamentoDAO {
         } finally {
             closeResources(conn, ps);
         }
+    }
+    
+    public List<Andamento> getAndamentosPorPorcesso(int idProcesso) throws SQLException, ClassNotFoundException{
+        String sql = "SELECT id, idProcesso, descricao, data"
+                    + " FROM andamento WHERE idProcesso = ?";
+        List<Andamento> lista = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+
+            conn = DatabaseLocator.getInstance().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, idProcesso);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(new AndamentoNaoLido(
+                            rs.getInt("id"), 
+                            rs.getString("descricao"), 
+                            rs.getDate("data")
+                        )
+                );
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, ps);
+        }
+        return lista;
     }
     
     private void closeResources(Connection conn, Statement st) {

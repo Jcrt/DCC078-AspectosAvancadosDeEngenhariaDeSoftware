@@ -9,6 +9,10 @@ import Enum.StatusEnum;
 import Enum.TipoEnvolvimentoEnum;
 import Model.EnvolvimentoProcesso;
 import Model.Processo;
+import Model.ProcessoArquivado;
+import Model.ProcessoAtivo;
+import Model.ProcessoBaixaProvisória;
+import Model.ProcessoEncerrado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +47,8 @@ public class ProcessoDAO {
     public void salvar(Processo model) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ps = null;
-
+        int idInserido = 0;
+        
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             String sql = "INSERT INTO processo (numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento) VALUES (?,?,?,?,?);";
@@ -59,7 +64,19 @@ public class ProcessoDAO {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                final int idInserido = rs.getInt(1);
+                idInserido = rs.getInt(1);
+                
+                for(Observer env : model.getEnvolvidos()){
+                    EnvolvimentoProcesso e = (EnvolvimentoProcesso) env;
+                    sql = "INSERT INTO envolvimentoprocesso(processo_id, pessoa_id, EnvolvimentoProcessoEnum)"
+                            + "VALUES(?,?,?)";
+                    ps = conn.prepareStatement(sql);
+                    ps.setInt(1, idInserido);
+                    ps.setInt(2, e.getIdPessoaEnvolvimento());
+                    ps.setInt(3, e.getTipoEnvolvimento());  
+                    
+                    ps.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             throw e;
@@ -103,7 +120,22 @@ public class ProcessoDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Processo model = new Processo(rs.getString("numeroProcesso"));
+                Processo model = null;
+                switch(rs.getInt("status")){
+                    case 1: 
+                        model = new ProcessoAtivo(rs.getString("numeroProcesso"));
+                    break;
+                    case 2: 
+                        model = new ProcessoArquivado(rs.getString("numeroProcesso"));
+                    break;
+                    case 3: 
+                        model = new ProcessoBaixaProvisória(rs.getString("numeroProcesso"));
+                    break;
+                    case 4:
+                        model = new ProcessoEncerrado(rs.getString("numeroProcesso"));
+                    break;
+                }
+                
                 model.setId(rs.getInt("id"));
                 model.setStatus(StatusEnum.values()[rs.getInt("status")]);
                 model.setDataCadastro(rs.getDate("dataCadastro"));
@@ -120,6 +152,56 @@ public class ProcessoDAO {
             closeResources(conn, ps);
         }
         return lista;
+    }
+    
+    public Processo getProcesso(int idProcesso) throws ClassNotFoundException, SQLException{
+        AndamentoDAO aDAO = AndamentoDAO.getInstance();
+        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento "
+                    + "FROM Processo WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Processo model = null;
+        
+        try {
+
+            conn = DatabaseLocator.getInstance().getConnection();
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, idProcesso);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                switch(rs.getInt("status")){
+                    case 1: 
+                        model = new ProcessoAtivo(rs.getString("numeroProcesso"));
+                    break;
+                    case 2: 
+                        model = new ProcessoArquivado(rs.getString("numeroProcesso"));
+                    break;
+                    case 3: 
+                        model = new ProcessoBaixaProvisória(rs.getString("numeroProcesso"));
+                    break;
+                    case 4:
+                        model = new ProcessoEncerrado(rs.getString("numeroProcesso"));
+                    break;
+                }
+                
+                model.setId(idProcesso);
+                model.setStatus(StatusEnum.values()[rs.getInt("status")]);
+                model.setDataCadastro(rs.getDate("dataCadastro"));
+                model.setDataBaixa(rs.getDate("dataBaixa"));
+                model.setDataEncerramento(rs.getDate("dataEncerramento"));
+                model.setEnvolvidos(this.getEnvolvidosPorProcesso(model.getId()));
+                model.setAndamentos(aDAO.getAndamentosPorPorcesso(idProcesso));
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, ps);
+        }
+        return model;
     }
 
     private void closeResources(Connection conn, Statement st) {

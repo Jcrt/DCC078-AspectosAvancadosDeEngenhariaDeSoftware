@@ -6,12 +6,16 @@
 package Action;
 
 import Enum.StatusEnum;
-import Model.PessoaAdvogado;
+import Enum.TipoEnvolvimentoEnum;
+import Model.EnvolvimentoProcesso;
 import Model.Processo;
-import Persistencia.PessoaAdvogadoDAO;
+import Model.ProcessoAtivo;
+import Persistencia.PessoaDAO;
 import Persistencia.ProcessoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,30 +31,63 @@ public class CadastroProcessoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nProcesso = request.getParameter("txtNumeroProcesso");
-        String advogado = request.getParameter("txtAdvogado");
+        PessoaDAO pDAO = PessoaDAO.getInstance();
+             
+        try {
+            Processo processo = new ProcessoAtivo(nProcesso);
+            processo.setStatus(StatusEnum.ATIVO);
+            processo.setDataCadastro(new java.sql.Date(new java.util.Date().getTime()));
 
-        if (advogado.equals("") || nProcesso.equals("")) {
-            response.sendRedirect("Processo/Formulario.jsp");
-        } else {
-            try {
-                 Processo processo = new Processo();
-                 processo.setNumeroProcesso(nProcesso);
-                 processo.setStatus(StatusEnum.ATIVO);
-                 processo.setDataCadastro(new java.sql.Date(new java.util.Date().getTime()));
-                 
-//                 PessoaAdvogado adv = PessoaAdvogadoDAO.getInstance().getPessoa(Integer.parseInt(advogado));
-//                 processo.setEnvolvidos(adv);                
-                 
-                ProcessoDAO.getInstance().salvar(processo);
-                response.sendRedirect("Sucesso.jsp");
-                
-            } catch (SQLException e) {
-                response.sendRedirect("Erro.jsp");
-                e.printStackTrace();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CadastroProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
+            String idCliente = request.getParameter("comboCliente");
+            String idContrario = request.getParameter("comboContrario");
+            String idAdvogado = request.getParameter("comboAdvogado");
+            String idOutro = request.getParameter("comboOutro");
+            
+            List<Observer> envolvidos = new ArrayList<>();
+            
+            if(idCliente.length() > 0){
+                envolvidos.add(
+                        new EnvolvimentoProcesso(pDAO.getPessoaById(Integer.parseInt(idCliente)), 
+                                TipoEnvolvimentoEnum.CLIENTE
+                        )
+                );
             }
+            
+            if(idAdvogado.length() > 0){
+                envolvidos.add(
+                        new EnvolvimentoProcesso(pDAO.getPessoaById(Integer.parseInt(idAdvogado)), 
+                                TipoEnvolvimentoEnum.ADVOGADO
+                        )
+                );
+            }
+            
+            if(idContrario.length() > 0){
+                envolvidos.add(
+                        new EnvolvimentoProcesso(pDAO.getPessoaById(Integer.parseInt(idContrario)), 
+                                TipoEnvolvimentoEnum.CONTRARIO
+                        )
+                );
+            }
+            
+            if(idOutro.length() > 0){
+                envolvidos.add(
+                        new EnvolvimentoProcesso(pDAO.getPessoaById(Integer.parseInt(idOutro)), 
+                                TipoEnvolvimentoEnum.OUTROS
+                        )
+                );
+            }
+            
+            processo.setEnvolvidos(envolvidos);
+            ProcessoDAO.getInstance().salvar(processo);
+            response.sendRedirect("Sucesso.jsp");
+
+        } catch (SQLException e) {
+            response.sendRedirect("Erro.jsp");
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
 }

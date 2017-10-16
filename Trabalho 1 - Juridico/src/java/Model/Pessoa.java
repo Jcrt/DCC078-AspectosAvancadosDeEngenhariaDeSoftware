@@ -19,7 +19,10 @@ public abstract class Pessoa implements IPessoa {
     private String email;
 
     @Override
-    public abstract int getTipo();
+    public abstract int getTipoEnum();
+    
+    @Override
+    public abstract String getTipo();
 
     public Pessoa() {
 

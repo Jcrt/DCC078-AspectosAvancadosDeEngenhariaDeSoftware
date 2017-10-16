@@ -65,6 +65,10 @@ public abstract class Andamento {
     public Date getData() {
         return data;
     }
+    
+    public String getDateFormatted(){
+        return DateUtil.GetFormattedDate(data);
+    }
 
     public void setData(Date data) {
         this.data = data;

@@ -18,5 +18,5 @@ public interface IPessoaDAO<T> {
 
     public abstract void atualizar(T objeto) throws SQLException, ClassNotFoundException;
 
-    public abstract List<T> listar() throws ClassNotFoundException, SQLException;
+    public List<T> listar() throws ClassNotFoundException, SQLException;
 }

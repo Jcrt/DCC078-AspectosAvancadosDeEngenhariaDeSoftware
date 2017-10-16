@@ -5,6 +5,9 @@
  */
 package Enum;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author 07228620674
@@ -24,5 +27,11 @@ public enum StatusEnum {
     public int getValor()
     {
         return valor;
+    }
+    
+    public static ArrayList<StatusEnum> listaTodos(){
+        ArrayList<StatusEnum> lista = new ArrayList<>();
+        lista.addAll(Arrays.asList(values()));
+        return lista;
     }
 }

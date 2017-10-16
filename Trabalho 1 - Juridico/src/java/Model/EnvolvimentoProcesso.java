@@ -27,6 +27,12 @@ public class EnvolvimentoProcesso implements Observer {
         this.notificacoes = new ArrayList<>();
     }
     
+    public EnvolvimentoProcesso(Pessoa p, TipoEnvolvimentoEnum tipo){
+        this();
+        this.pessoaEnvolvimento = p;
+        this.tipoEnvolvimento = tipo;
+    }
+    
     public EnvolvimentoProcesso(int id, Pessoa p, TipoEnvolvimentoEnum tipo){
         this();
         this.id = id;

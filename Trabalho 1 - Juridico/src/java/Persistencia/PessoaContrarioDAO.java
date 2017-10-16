@@ -48,7 +48,7 @@ public class PessoaContrarioDAO implements IPessoaDAO<PessoaContrario> {
             ps.setString(2, model.getTipoDocumento());
             ps.setString(3, model.getNumeroDocumento());
             ps.setString(4, model.getEmail());
-            ps.setInt(5, model.getTipo());
+            ps.setInt(5, model.getTipoEnum());
             ps.setInt(5, model.getId());
 
             ps.executeUpdate();
@@ -101,7 +101,7 @@ public class PessoaContrarioDAO implements IPessoaDAO<PessoaContrario> {
             ps.setString(2, model.getTipoDocumento());
             ps.setString(3, model.getNumeroDocumento());
             ps.setString(4, model.getEmail());
-            ps.setInt(5, model.getTipo());
+            ps.setInt(5, model.getTipoEnum());
 
             ps.execute();
 

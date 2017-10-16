@@ -55,7 +55,7 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
             ps.setString(2, model.getTipoDocumento());
             ps.setString(3, model.getNumeroDocumento());
             ps.setString(4, model.getEmail());
-            ps.setInt(5, model.getTipo());
+            ps.setInt(5, model.getTipoEnum());
 
             ps.execute();
 
@@ -79,7 +79,7 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
             ps.setString(2, model.getTipoDocumento());
             ps.setString(3, model.getNumeroDocumento());
             ps.setString(4, model.getEmail());
-            ps.setInt(5, model.getTipo());
+            ps.setInt(5, model.getTipoEnum());
             ps.setInt(5, model.getId());
 
             ps.executeUpdate();
@@ -176,6 +176,35 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
         return pessoa;
     }
     
+    public List<IPessoa> listarPessoas() throws ClassNotFoundException, SQLException{
+        Connection con;
+        PreparedStatement ps;
+        List<IPessoa> pessoas = new ArrayList<>();
+        String sql = "SELECT * FROM pessoa";
+        
+        con = DatabaseLocator.getInstance().getConnection();
+        ps = con.prepareStatement(sql);
+       
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            switch(rs.getInt("tipo")){
+                case 1:
+                    pessoas.add(new PessoaAdvogado(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email")));
+                break;
+                case 2:
+                    pessoas.add(new PessoaCliente(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email")));
+                break;
+                case 3:
+                    pessoas.add(new PessoaContrario(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email")));
+                break;
+                case 4:
+                    pessoas.add(new PessoaOutro(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email")));
+                break;
+            }
+        }
+        return pessoas;
+    }
+    
     public Pessoa getPessoaById(int id) throws ClassNotFoundException, SQLException{
         
         Connection con = null;
@@ -214,10 +243,10 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "SELECT p.numeroProcesso, e.mensagem, e.data \n" +
-                        "FROM envolvidonotificacaoprocesso e\n" +
-                        "	INNER JOIN processo p ON e.processo_id = p.id\n" +
-                        "WHERE e.processo_id = ?"
+            String sql = "SELECT p.numeroProcesso, e.mensagem, e.data " +
+                        "FROM envolvidonotificacaoprocesso e" +
+                        "	INNER JOIN processo p ON e.processo_id = p.id " +
+                        "WHERE e.pessoa_id = ? "
                         + " ORDER BY data DESC";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, idPessoa);

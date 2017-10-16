@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="notificacoesBean" class="Bean.NotificacoesBean" scope="request"/>
+
 <jsp:setProperty name="notificacoesBean" property="idPessoa" value='<%= session.getAttribute("idPessoa") %>' />  
 
 <!DOCTYPE html>

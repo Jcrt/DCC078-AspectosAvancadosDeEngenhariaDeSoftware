@@ -15,7 +15,6 @@ public class PessoaAdvogado extends Pessoa {
 
     public PessoaAdvogado() {
     }
-
     
     public PessoaAdvogado(int id, String nome) {
         super(id, nome);
@@ -31,7 +30,12 @@ public class PessoaAdvogado extends Pessoa {
     }
 
     @Override
-    public int getTipo(){
+    public int getTipoEnum(){
         return TipoPessoaEnum.ADVOGADO.getValor();
+    }
+
+    @Override
+    public String getTipo() {
+        return "Advogado";
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
  * @author thassya
  */
 public class PessoaBean {
-    public ArrayList<TipoPessoaEnum>  getTipoPessoa() throws ClassNotFoundException, SQLException {
+    public ArrayList<TipoPessoaEnum> getTipoPessoa() throws ClassNotFoundException, SQLException {
         ArrayList<TipoPessoaEnum> tipoPessoa = new ArrayList<>();
         tipoPessoa = TipoPessoaEnum.listaTodos();
         return tipoPessoa;       

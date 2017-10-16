@@ -24,7 +24,7 @@ public class TesteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Processo processo = new Processo("2013.009.22.1223.122.22");
+        Processo processo = new ProcessoAtivo("2013.009.22.1223.122.22");
         
         Pessoa p1 = new PessoaAdvogado(1, "Advogado");
         Pessoa p2 = new PessoaCliente(2, "Cliente");

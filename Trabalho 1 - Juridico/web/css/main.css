@@ -23,3 +23,13 @@ input[type=submit], button {padding: 14px 20px;margin: 8px 0;border: none; curso
     width: 30%;
     margin: 0 auto;
 }
+
+td, th{
+    text-align: left;
+    padding-right: 20px;
+}
+
+textarea{
+    width: 450px;
+    height: 150px;
+}

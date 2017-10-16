@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author 07228620674
@@ -13,6 +15,10 @@ public class AndamentoNaoLido extends Andamento {
 
     public AndamentoNaoLido(String descricao) {
         super(descricao);
+    }
+    
+    public AndamentoNaoLido(int id, String descricao, Date data){
+        super(id, descricao, data);
     }
 
     @Override

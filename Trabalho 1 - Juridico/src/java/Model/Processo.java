@@ -24,7 +24,11 @@ public class Processo extends Observable {
     private List<Andamento> andamentos;
     private Date dataCadastro;
     private Date dataBaixa;
-    private Date dataEncerramento;
+    private Date dataEncerramento; 
+    
+    public String getStatusString() {
+        return "Ativo";
+    }
     
     public Processo(){
         this.envolvidos = new ArrayList<>();
@@ -70,6 +74,9 @@ public class Processo extends Observable {
 
     public void setEnvolvidos(List<Observer> envolvidos) {
         this.envolvidos = envolvidos;
+        envolvidos.forEach((o) -> {
+            this.addObserver(o);
+        });
     }
 
     public int getStatus() {

@@ -10,8 +10,12 @@ package Interface;
  * @author 07228620674
  */
 public interface IPessoa {
-    String getTipoDocumento();
-    int getTipo();
+    
+    public int getTipoEnum();
+    
+    public String getTipoDocumento();
+    
+    public String getTipo();
 
     public String getNome();
 

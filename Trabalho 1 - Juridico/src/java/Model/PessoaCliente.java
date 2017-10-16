@@ -26,12 +26,17 @@ public class PessoaCliente extends Pessoa {
 
     @Override
     public String getTipoDocumento() {
-        return "RG: ";
+        return "RG";
     }
 
     @Override
-    public int getTipo() {
+    public int getTipoEnum() {
         return TipoPessoaEnum.CLIENTE.getValor();
+    }
+
+    @Override
+    public String getTipo() {
+        return "Cliente";
     }
 
 }

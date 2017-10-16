@@ -35,14 +35,13 @@ public class EnvolvimentoProcessoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
              String sql = "INSERT INTO envolvidoNotificacaoProcesso (processo_id, pessoa_id, mensagem, data) "
-                       + " VALUES (?,?,?,?);";
+                       + " VALUES (?,?,?,NOW());";
 
             ps = conn.prepareStatement(sql);
 
             ps.setInt(1, model.getIdProcesso());
             ps.setInt(2, model.getIdPessoaEnvolvimento());
             ps.setString(3, msg);
-            ps.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
             
             ps.execute();
 
