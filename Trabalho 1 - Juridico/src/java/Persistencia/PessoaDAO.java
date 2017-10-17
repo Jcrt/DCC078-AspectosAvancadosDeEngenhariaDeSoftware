@@ -212,26 +212,34 @@ public class PessoaDAO implements IPessoaDAO<IPessoa>{
         Pessoa pessoa = null;
         String sql = "SELECT * FROM pessoa WHERE id = ?";
         
-        con = DatabaseLocator.getInstance().getConnection();
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
-        
-        ResultSet rs = ps.executeQuery();
-        if(rs.next()){
-            switch(rs.getInt("tipo")){
-                case 1:
-                    pessoa = new PessoaAdvogado(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
-                break;
-                case 2:
-                    pessoa = new PessoaCliente(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
-                break;
-                case 3:
-                    pessoa = new PessoaContrario(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
-                break;
-                case 4:
-                    pessoa = new PessoaOutro(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
-                break;
+        try {
+            con = DatabaseLocator.getInstance().getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                switch(rs.getInt("tipo")){
+                    case 1:
+                        pessoa = new PessoaAdvogado(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                    break;
+                    case 2:
+                        pessoa = new PessoaCliente(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                    break;
+                    case 3:
+                        pessoa = new PessoaContrario(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                    break;
+                    case 4:
+                        pessoa = new PessoaOutro(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
+                    break;
+                }
             }
+            
+        } catch(SQLException e){
+            throw e;
+        }
+        finally {
+            closeResources(con, ps);
         }
         return pessoa;
     }

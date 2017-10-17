@@ -12,10 +12,11 @@
     </head>
     <body>
         <nav>
-            <ul class=menu>
+            <ul class="menu">
                 <li><a href='<%=request.getContextPath() %>/index.jsp'>Inicio</a>
                 <li><a href='FrontController?action=ListarPessoas'>Pessoas</a></li>
                 <li><a href='FrontController?action=ListarProcessos'>Processos</a></li>
+                <li><a href='FrontController?action=Logout'>Sair</a></li>
             </ul>
         </nav> 
     </body>

@@ -5,18 +5,22 @@
  */
 package Model;
 
+import Enum.StatusEnum;
+
 /**
  *
  * @author thassya
  */
 public class ProcessoArquivado extends Processo { 
     
-     public ProcessoArquivado(){
-        
+    public ProcessoArquivado(){
+        super();
+        super.setStatus(StatusEnum.ARQUIVADO);
     }
     
     public ProcessoArquivado(String numeroProcesso){
         super(numeroProcesso);
+        super.setStatus(StatusEnum.ARQUIVADO);
     }
     
     @Override

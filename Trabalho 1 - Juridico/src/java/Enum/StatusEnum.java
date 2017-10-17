@@ -34,4 +34,32 @@ public enum StatusEnum {
         lista.addAll(Arrays.asList(values()));
         return lista;
     }
+    
+    public static String getEnumDescr(StatusEnum valor){
+        String descr = " - ";
+        switch(valor){
+            case ARQUIVADO:
+                descr = "Arquivado";
+            break;
+            case ATIVO:
+                descr = "Ativo";
+            break;
+            case ENCERRADO:
+                descr = "Encerrado";
+            break;
+            case BAIXAPROVISORIA:
+                descr = "Baixa Provisória";
+            break;
+        }
+        return descr;
+    }
+    
+    public static StatusEnum getEnumByInt(int valor){
+        StatusEnum valorCerto = null;
+        for(StatusEnum s : values()){
+            if(s.getValor() == valor)
+                valorCerto = s;
+        }
+        return valorCerto;
+    }
 }

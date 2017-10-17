@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Enum.StatusEnum;
+
 /**
  *
  * @author thassya
@@ -12,11 +14,13 @@ package Model;
 public class ProcessoEncerrado extends Processo {
     
     public ProcessoEncerrado(){
-        
+        super();
+        super.setStatus(StatusEnum.ENCERRADO);
     }
     
     public ProcessoEncerrado(String numeroProcesso){
         super(numeroProcesso);
+        super.setStatus(StatusEnum.ENCERRADO);
     }
     
     @Override

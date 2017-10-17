@@ -10,11 +10,8 @@ import Model.Processo;
 import Persistencia.ProcessoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,25 +19,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Julio R. Trindade
  */
-public class FormularioStatusProcessoAction implements Action{
+public class EdicaoStatusProcessoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ArrayList<StatusEnum> status = StatusEnum.listaTodos();
             String idProcesso = request.getParameter("idProcesso");
+            String newStatus = request.getParameter("cbbStatus");
             
             ProcessoDAO pDAO = ProcessoDAO.getInstance();
             Processo p = pDAO.getProcesso(Integer.parseInt(idProcesso));
+            p.setStatus(StatusEnum.getEnumByInt(Integer.parseInt(newStatus)));
             
-            request.setAttribute("idProcesso", idProcesso);
-            request.setAttribute("statusLista", status);
-            request.setAttribute("statusOld", p.getStatus());
+            pDAO.updateStatusProcesso(p);
+            pDAO.putNotificacoesEnvolvidos(p);
             
-            RequestDispatcher rd = request.getRequestDispatcher("Processo/FormularioStatusProcesso.jsp");
-            rd.forward(request, response);
-        } catch (ClassNotFoundException | ServletException | SQLException ex) {
-            Logger.getLogger(FormularioStatusProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("FrontController?action=ListarProcessos");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EdicaoStatusProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

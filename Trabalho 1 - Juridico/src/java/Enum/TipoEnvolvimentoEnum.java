@@ -21,6 +21,34 @@ public enum TipoEnvolvimentoEnum {
         this.valor = valor;
     }
     
+    public static String getEnumDescr(TipoEnvolvimentoEnum valor){
+        String descr = " - ";
+        switch(valor){
+            case CLIENTE:
+                descr = "Cliente";
+            break;
+            case CONTRARIO:
+                descr = "Contrário";
+            break;
+            case ADVOGADO:
+                descr = "Advogado";
+            break;
+            case OUTROS:
+                descr = "Outros";
+            break;
+        }
+        return descr;
+    }
+    
+    public static TipoEnvolvimentoEnum getEnumByInt(int valor){
+        TipoEnvolvimentoEnum valorCerto = null;
+        for(TipoEnvolvimentoEnum s : values()){
+            if(s.getValor() == valor)
+                valorCerto = s;
+        }
+        return valorCerto;
+    }
+    
     public int getValor()
     {
         return valor;

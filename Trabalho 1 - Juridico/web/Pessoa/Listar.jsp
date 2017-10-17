@@ -11,13 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pessoas</title>
-       <link href="<%=request.getContextPath() %>/css/main.css" rel="stylesheet" type="text/css"/>
+        <link href="<%=request.getContextPath() %>/css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div id="conteudo">
             <jsp:include page="../partials/_Menu.jsp" /> 
             <h1>Lista de Pessoas</h1>
-            <a href="FrontController?action=FormularioPessoa"> Cadastrar nova Pessoa</a>
+            <a href="FrontController?action=FormularioPessoa">(+)Cadastrar nova Pessoa</a>
             <hr />
             <table>
                 <thead>

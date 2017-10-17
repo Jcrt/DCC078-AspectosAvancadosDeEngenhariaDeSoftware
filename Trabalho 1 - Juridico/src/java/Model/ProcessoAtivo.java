@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Enum.StatusEnum;
+
 /**
  *
  * @author thassya
@@ -12,11 +14,13 @@ package Model;
 public class ProcessoAtivo extends Processo {
     
     public ProcessoAtivo(){
-        
+        super();
+        super.setStatus(StatusEnum.ATIVO);
     }
     
     public ProcessoAtivo(String numeroProcesso){
         super(numeroProcesso);
+        super.setStatus(StatusEnum.ATIVO);
     }
     
     @Override

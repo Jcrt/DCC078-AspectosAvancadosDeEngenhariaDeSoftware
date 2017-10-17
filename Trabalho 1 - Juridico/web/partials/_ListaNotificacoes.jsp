@@ -18,7 +18,7 @@
             <hr />
             <table>
                 <thead>
-                    <th>Número do processo</th>
+                    <th style="white-space: nowrap">Número do processo</th>
                     <th>Mensagem</th>
                 </thead>
                 <tbody>

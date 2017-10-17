@@ -6,6 +6,7 @@
 package Model;
 
 import Enum.StatusEnum;
+import Enum.TipoEnvolvimentoEnum;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,5 +120,17 @@ public class Processo extends Observable {
 
     public void setDataEncerramento(Date dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
+    }
+    
+    public String getMsgEnvolvimentoPessoa(int idPessoa){
+        String msg = "-";
+        for(Observer e : this.envolvidos){
+            EnvolvimentoProcesso env = (EnvolvimentoProcesso) e;
+            if(env.getPessoaEnvolvimento().getId() == idPessoa)
+                msg = "Você tem o envolvimento '" + 
+                    TipoEnvolvimentoEnum.getEnumDescr(TipoEnvolvimentoEnum.getEnumByInt(env.getTipoEnvolvimento())) + 
+                    "' neste processo";  
+        }    
+        return msg;      
     }
 }

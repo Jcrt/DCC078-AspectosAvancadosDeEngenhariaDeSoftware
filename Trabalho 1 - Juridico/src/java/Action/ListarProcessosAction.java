@@ -28,8 +28,10 @@ public class ListarProcessosAction implements Action {
         try {
             ProcessoDAO pDAO = ProcessoDAO.getInstance();
             List<Processo> listProc = pDAO.listar();
+            int idPessoa = (int) request.getSession(true).getAttribute("idPessoa");
             
             request.setAttribute("listaProcessos", listProc);
+            request.setAttribute("idPessoa", idPessoa);
             
             RequestDispatcher rd = request.getRequestDispatcher("Processo/Listar.jsp");
             rd.forward(request, response);

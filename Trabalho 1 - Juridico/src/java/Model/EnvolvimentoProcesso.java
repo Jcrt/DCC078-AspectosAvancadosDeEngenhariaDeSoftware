@@ -92,7 +92,7 @@ public class EnvolvimentoProcesso implements Observer {
         String msg = "";
         Processo p = (Processo) processo;
         if(arg instanceof StatusEnum){
-            msg = "O Status do processo " + p.getNumeroProcesso() + " fol alterado para " + arg.toString();
+            msg = "O Status do processo " + p.getNumeroProcesso() + " fol alterado para " + StatusEnum.getEnumDescr((StatusEnum) arg) + ".";
         } else if(arg instanceof Andamento){
             Andamento anda = (Andamento)arg;
             String strMsg = anda.getDescricao().length() < 30 ? anda.getDescricao() : anda.getDescricao().substring(0, 30);
