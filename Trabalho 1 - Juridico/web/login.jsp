@@ -22,8 +22,7 @@
                             <hr />
                         </td>
                     </tr>
-                </thead>
-                <tbody>
+               
                     <tr>
                         <td>
                             <form method="post" action="FrontController?action=Login">

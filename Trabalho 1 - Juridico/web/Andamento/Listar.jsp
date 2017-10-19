@@ -39,9 +39,9 @@
                     <c:forEach var="andamento" items="${listaAndamentos}">
                         <tr>
                             <td></td>
-                            <td>${andamento.getDescricao()}</td>
-                            <td>${andamento.getDateFormatted()}</td>
-                        </tr>
+                            <td style="white-space: nowrap">${andamento.getDescricao()}</td>
+                            <td style="white-space: nowrap">${andamento.getStatusLido()}</td>
+                        </tr> 
                     </c:forEach>
                 </tbody>
             </table>

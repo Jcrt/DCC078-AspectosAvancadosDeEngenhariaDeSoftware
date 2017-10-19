@@ -22,11 +22,7 @@
 
             <jsp:include page="partials/_Menu.jsp" /> 
             <h1>Bem vindo ao Controle de Processos, <%=request.getSession(true).getAttribute("nomePessoa")%>!</h1>
-            <h2>A forma mais simples de controlar seus processos e notificar os envolvidos.</h2>
-            
-            <br/>
-            <br/>
-            <br/>
+           
             <div>
                 <jsp:include page="partials/_ListaNotificacoes.jsp"/>
             </div>
