@@ -91,7 +91,5 @@ public class CadastroProcessoAction implements IAction {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-
 }
