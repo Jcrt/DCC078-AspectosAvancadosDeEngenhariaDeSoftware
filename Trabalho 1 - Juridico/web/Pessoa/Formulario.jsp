@@ -36,7 +36,7 @@
                 <select id="comboTipoPessoa" name="txtTipoPessoa">
                     <option value="">..</option>
                     <c:forEach var="tipoPessoa" items="${tipoPessoaLista}">
-                        <option value="${tipoPessoa.valor}">${tipoPessoa}</option>
+                        <option value="${tipoPessoa.getValor()}">${tipoPessoa}</option>
                     </c:forEach>
                 </select>
                 <br>

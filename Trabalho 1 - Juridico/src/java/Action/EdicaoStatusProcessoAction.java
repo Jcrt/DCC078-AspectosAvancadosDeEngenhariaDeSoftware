@@ -14,12 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class EdicaoStatusProcessoAction implements Action {
+public class EdicaoStatusProcessoAction implements IAction {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

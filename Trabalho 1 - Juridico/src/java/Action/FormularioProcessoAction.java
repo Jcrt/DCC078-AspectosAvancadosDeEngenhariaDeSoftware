@@ -17,12 +17,15 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
+import Model.Fase;
+import Persistencia.FaseDAO;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class FormularioProcessoAction implements Action {
+public class FormularioProcessoAction implements IAction {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -32,21 +35,21 @@ public class FormularioProcessoAction implements Action {
             List<IPessoa> pCli = pDAO.listar(TipoPessoaEnum.CLIENTE);
             List<IPessoa> pAdv = pDAO.listar(TipoPessoaEnum.ADVOGADO);
             List<IPessoa> pCon = pDAO.listar(TipoPessoaEnum.CONTRARIO);
+
+
             List<IPessoa> pOut = pDAO.listar(TipoPessoaEnum.OUTROS);
-            
+            List<Fase> fases = FaseDAO.getInstance().listar();
+             
             request.setAttribute("clientes", pCli);
             request.setAttribute("contrarios", pCon);
             request.setAttribute("advogados", pAdv);
             request.setAttribute("outros", pOut);
+            request.setAttribute("fasesList", fases);
             
             RequestDispatcher rd = request.getRequestDispatcher("Processo/Formulario.jsp");
             rd.forward(request, response);
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FormularioProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormularioProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServletException ex) {
+        } catch (ClassNotFoundException | SQLException | ServletException ex) {
             Logger.getLogger(FormularioProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }

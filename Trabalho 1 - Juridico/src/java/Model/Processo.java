@@ -26,6 +26,7 @@ public class Processo extends Observable {
     private Date dataCadastro;
     private Date dataBaixa;
     private Date dataEncerramento; 
+    private Fase fase;
     
     public String getStatusString() {
         return "Ativo";
@@ -35,6 +36,21 @@ public class Processo extends Observable {
         this.envolvidos = new ArrayList<>();
         this.andamentos = new ArrayList<>();
         this.status = StatusEnum.ATIVO;
+    }
+
+    public Fase getFase() {
+        return fase;
+    }
+    
+    public String getFaseDescr(){
+        if(this.fase == null)
+            return " - ";
+        else
+            return this.fase.getDescricao();
+    }
+    
+    public void setFase(Fase fase) {
+        this.fase = fase;
     }
     
     public Processo(String numProc){
@@ -127,9 +143,9 @@ public class Processo extends Observable {
         for(Observer e : this.envolvidos){
             EnvolvimentoProcesso env = (EnvolvimentoProcesso) e;
             if(env.getPessoaEnvolvimento().getId() == idPessoa)
-                msg = "Você tem o envolvimento '" + 
+                msg = "Você é o '" + 
                     TipoEnvolvimentoEnum.getEnumDescr(TipoEnvolvimentoEnum.getEnumByInt(env.getTipoEnvolvimento())) + 
-                    "' neste processo";  
+                    "' deste processo";  
         }    
         return msg;      
     }

@@ -16,12 +16,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class CadastroAndamentoAction implements Action {
+public class CadastroAndamentoAction implements IAction {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

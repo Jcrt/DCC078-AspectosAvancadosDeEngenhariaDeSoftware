@@ -57,7 +57,16 @@
                     </c:forEach>
                 </select>
                 <br />
- 
+                
+                Selecione uma Fase
+                <select id="comboFase" name="comboFase">
+                    <option value="">..</option>
+                    <c:forEach var="fase" items="${fasesList}">
+                        <option value="${fase.getId()}">${fase.getDescricao()}</option>
+                    </c:forEach>
+                </select>
+                <br />
+                
                 <input type="submit" value="Cadastrar"/>
                 <button type="button" onclick="history.back(-1)">
                     Voltar

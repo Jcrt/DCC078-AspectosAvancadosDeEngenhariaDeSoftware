@@ -6,7 +6,6 @@
 package Persistencia;
 
 import Enum.TipoPessoaEnum;
-import Interface.IPessoaDAO;
 import Model.PessoaContrario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,12 +14,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import Interface.IDAO;
 
 /**
  *
  * @author thassya
  */
-public class PessoaContrarioDAO implements IPessoaDAO<PessoaContrario> {
+public class PessoaContrarioDAO implements IDAO<PessoaContrario> {
 
     private static PessoaContrarioDAO instance;
 
@@ -124,6 +124,11 @@ public class PessoaContrarioDAO implements IPessoaDAO<PessoaContrario> {
         } catch (SQLException e) {
 
         }
+    }
+
+    @Override
+    public PessoaContrario getById(int id) throws ClassNotFoundException, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

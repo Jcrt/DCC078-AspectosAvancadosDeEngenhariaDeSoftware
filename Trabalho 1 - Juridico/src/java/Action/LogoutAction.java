@@ -8,12 +8,13 @@ package Action;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class LogoutAction implements Action{
+public class LogoutAction implements IAction{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

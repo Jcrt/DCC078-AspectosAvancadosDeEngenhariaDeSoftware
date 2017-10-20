@@ -21,22 +21,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
+import Persistencia.FaseDAO;
 
 /**
  *
  * @author thassya
  */
-public class CadastroProcessoAction implements Action {
+public class CadastroProcessoAction implements IAction {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nProcesso = request.getParameter("txtNumeroProcesso");
+        String comboFase = request.getParameter("comboFase");
         PessoaDAO pDAO = PessoaDAO.getInstance();
-             
+        FaseDAO fDAO = FaseDAO.getInstance();
+        
         try {
             Processo processo = new ProcessoAtivo(nProcesso);
             processo.setStatus(StatusEnum.ATIVO);
             processo.setDataCadastro(new java.sql.Date(new java.util.Date().getTime()));
+            processo.setFase(fDAO.getById(Integer.parseInt(comboFase)));
 
             String idCliente = request.getParameter("comboCliente");
             String idContrario = request.getParameter("comboContrario");
@@ -83,7 +88,6 @@ public class CadastroProcessoAction implements Action {
 
         } catch (SQLException e) {
             response.sendRedirect("Erro.jsp");
-            e.printStackTrace();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,7 +22,11 @@ public enum TipoPessoaEnum {
     private static final ArrayList<TipoPessoaEnum> lista = new ArrayList<TipoPessoaEnum>();
  
     public static ArrayList<TipoPessoaEnum> listaTodos(){
-        lista.addAll(Arrays.asList(values()));
+        for(TipoPessoaEnum p : TipoPessoaEnum.values()){
+            if (!lista.contains(p)) {
+                lista.add(p);
+            }
+        }
         return lista;
     }
     

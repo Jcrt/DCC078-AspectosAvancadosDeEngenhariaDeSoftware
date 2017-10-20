@@ -12,11 +12,14 @@ import java.util.List;
  *
  * @author thassya
  */
-public interface IPessoaDAO<T> {
+public interface IDAO<T> {
 
     public abstract void salvar(T objeto) throws SQLException, ClassNotFoundException;
 
     public abstract void atualizar(T objeto) throws SQLException, ClassNotFoundException;
 
     public List<T> listar() throws ClassNotFoundException, SQLException;
+    
+    public T getById(int id) throws ClassNotFoundException, SQLException;
+    
 }

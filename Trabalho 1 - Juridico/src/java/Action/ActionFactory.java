@@ -5,7 +5,7 @@
  */
 package Action;
 
-import Action.Action;
+import Interface.IAction;
 
 /**
  *
@@ -13,8 +13,8 @@ import Action.Action;
  */
 public class ActionFactory {
 
-    public static Action create(String action) {
-        Action actionObject = null;
+    public static IAction create(String action) {
+        IAction actionObject = null;
         String nomeClasse = "Action." + action + "Action";
         Class classe = null;
         Object objeto = null;
@@ -26,9 +26,9 @@ public class ActionFactory {
             return null;
         }
         
-        if(!(objeto instanceof Action)) return null;
+        if(!(objeto instanceof IAction)) return null;
         
-        actionObject = (Action) objeto;
+        actionObject = (IAction) objeto;
         return actionObject;
     }
     

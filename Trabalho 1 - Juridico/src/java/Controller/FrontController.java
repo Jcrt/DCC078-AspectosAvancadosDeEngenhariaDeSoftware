@@ -6,12 +6,12 @@
 package Controller;
 
 import Action.ActionFactory;
-import Action.Action;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
 
 /**
  *
@@ -33,7 +33,7 @@ public class FrontController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String action = request.getParameter("action");
-        Action actionObject = null;
+        IAction actionObject = null;
         
         if(action != null || action.equals("")){
             actionObject = ActionFactory.create(action);

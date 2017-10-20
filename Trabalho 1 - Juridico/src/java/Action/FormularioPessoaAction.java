@@ -14,18 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import Interface.IAction;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class FormularioPessoaAction implements Action {
+public class FormularioPessoaAction implements IAction {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ArrayList<TipoPessoaEnum> tipoPessoa = new ArrayList<>();
-            tipoPessoa = TipoPessoaEnum.listaTodos();
+            ArrayList<TipoPessoaEnum> tipoPessoa = TipoPessoaEnum.listaTodos();
             request.setAttribute("tipoPessoaLista", tipoPessoa);
             
             RequestDispatcher rd = request.getRequestDispatcher("Pessoa/Formulario.jsp");

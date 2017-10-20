@@ -17,12 +17,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Interface.IAction;
 
 /**
  *
  * @author Julio R. Trindade
  */
-public class FormularioStatusProcessoAction implements Action{
+public class FormularioStatusProcessoAction implements IAction{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

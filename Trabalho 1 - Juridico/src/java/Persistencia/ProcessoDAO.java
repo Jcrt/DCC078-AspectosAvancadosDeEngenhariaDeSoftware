@@ -51,7 +51,7 @@ public class ProcessoDAO {
         
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "INSERT INTO processo (numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO processo (numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id) VALUES (?,?,?,?,?,?);";
 
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -60,6 +60,7 @@ public class ProcessoDAO {
             ps.setDate(3, model.getDataCadastro());
             ps.setDate(4, model.getDataBaixa());
             ps.setDate(5, model.getDataEncerramento());
+            ps.setInt(6, model.getFase().getId());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -107,7 +108,7 @@ public class ProcessoDAO {
     
     public List<Processo> listar() throws ClassNotFoundException, SQLException{
         AndamentoDAO aDAO = AndamentoDAO.getInstance();
-        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento "
+        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id "
                     + "FROM Processo";
         
         List<Processo> lista = new ArrayList<>();
@@ -143,6 +144,7 @@ public class ProcessoDAO {
                 model.setDataEncerramento(rs.getDate("dataEncerramento"));
                 model.setEnvolvidos(this.getEnvolvidosPorProcesso(model.getId()));
                 model.setAndamentos(aDAO.getAndamentosPorPorcesso(rs.getInt("id")));
+                model.setFase(FaseDAO.getInstance().getById(rs.getInt("fase_id")));
                 lista.add(model);
             }
 
@@ -156,7 +158,7 @@ public class ProcessoDAO {
     
     public Processo getProcesso(int idProcesso) throws ClassNotFoundException, SQLException{
         AndamentoDAO aDAO = AndamentoDAO.getInstance();
-        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento "
+        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id"
                     + "FROM Processo WHERE id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -193,6 +195,7 @@ public class ProcessoDAO {
                 model.setDataEncerramento(rs.getDate("dataEncerramento"));
                 model.setEnvolvidos(this.getEnvolvidosPorProcesso(model.getId()));
                 model.setAndamentos(aDAO.getAndamentosPorPorcesso(idProcesso));
+                model.setFase(FaseDAO.getInstance().getById(rs.getInt("fase_id")));
             }
 
         } catch (SQLException e) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Action;
+package Interface;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 07228620674
  */
-public interface Action {
+public interface IAction {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }
