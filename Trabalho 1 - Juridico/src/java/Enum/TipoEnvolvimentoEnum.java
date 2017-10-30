@@ -5,6 +5,9 @@
  */
 package Enum;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author Julio R. Trindade
@@ -16,9 +19,19 @@ public enum TipoEnvolvimentoEnum {
     OUTROS(4);
     
     private final int valor;
+    private static final ArrayList<TipoEnvolvimentoEnum> lista = new ArrayList<TipoEnvolvimentoEnum>();
     
     TipoEnvolvimentoEnum(int valor){
         this.valor = valor;
+    }
+    
+    public static ArrayList<TipoEnvolvimentoEnum> listaTodos(){
+        for(TipoEnvolvimentoEnum p : TipoEnvolvimentoEnum.values()){
+            if (!lista.contains(p)) {
+                lista.add(p);
+            }
+        }
+        return lista;
     }
     
     public static String getEnumDescr(TipoEnvolvimentoEnum valor){
@@ -52,5 +65,13 @@ public enum TipoEnvolvimentoEnum {
     public int getValor()
     {
         return valor;
+    }
+    
+    public static HashMap<String, String> getEnumData(){
+        HashMap<String, String> map = new HashMap<>();
+        for(TipoEnvolvimentoEnum s : values()){
+            map.put(String.valueOf(s.getValor()), TipoEnvolvimentoEnum.getEnumDescr(s));
+        }
+        return map;
     }
 }

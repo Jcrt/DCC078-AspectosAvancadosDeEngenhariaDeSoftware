@@ -6,6 +6,7 @@
 package Model;
 
 import Interface.IPessoa;
+import java.util.List;
 
 /**
  *
@@ -17,13 +18,19 @@ public abstract class Pessoa implements IPessoa {
     private String nome;
     private String numeroDocumento;
     private String email;
-
+    private Pessoa proxAlteradorFase;
+    private List<Fase> alteraFases;
+ 
     @Override
     public abstract int getTipoEnum();
     
+    public String getMsgAlteracaoFase(){
+        return "Apenas o " + getTipo() + " pode alterar esta fase";
+    }
+    
     @Override
     public abstract String getTipo();
-
+    
     public Pessoa() {
 
     }
@@ -81,5 +88,33 @@ public abstract class Pessoa implements IPessoa {
     @Override
     public String getTipoDocumento() {
         return "CPF: ";
+    }
+    
+    public String getAlteradorFase(Fase fase){
+        if(alteraFases.contains(fase)){
+            return getMsgAlteracaoFase();
+        } else{
+            if(proxAlteradorFase != null){
+                return proxAlteradorFase.getMsgAlteracaoFase();
+            } else{
+                return "Qualquer usuário pode alterar a fase";
+            }
+        }
+    }
+    
+    public Pessoa getProxAlteradorFase() {
+        return proxAlteradorFase;
+    }
+
+    public void setProxAlteradorFase(Pessoa proxAlteradorFase) {
+        this.proxAlteradorFase = proxAlteradorFase;
+    }
+
+    public List<Fase> getAlteraFases() {
+        return alteraFases;
+    }
+
+    public void setAlteraFases(List<Fase> alteraFases) {
+        this.alteraFases = alteraFases;
     }
 }

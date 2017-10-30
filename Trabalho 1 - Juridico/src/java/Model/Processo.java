@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Processo extends Observable {
     private Date dataBaixa;
     private Date dataEncerramento; 
     private Fase fase;
+    private boolean isSuccessBuildChain;
     
     public String getStatusString() {
         return "Ativo";
@@ -36,6 +38,7 @@ public class Processo extends Observable {
         this.envolvidos = new ArrayList<>();
         this.andamentos = new ArrayList<>();
         this.status = StatusEnum.ATIVO;
+        this.isSuccessBuildChain = false;
     }
 
     public Fase getFase() {
@@ -148,5 +151,50 @@ public class Processo extends Observable {
                     "' deste processo";  
         }    
         return msg;      
+    }
+    
+    public void makeChainFase(){
+        
+        try {
+            ArrayList<Pessoa> pList = new ArrayList<>();
+        
+            envolvidos.stream().map((envolvido) -> (EnvolvimentoProcesso) envolvido).map((env) -> env.getPessoaEnvolvimento()).forEachOrdered((p) -> {
+                if(p instanceof PessoaAdvogado){
+                    pList.add(0, p);
+                } else if(p instanceof PessoaCliente){
+                    pList.add(1, p);
+                } else if(p instanceof PessoaContrario){
+                    pList.add(2, p);
+                } else if(p instanceof PessoaOutro){
+                    pList.add(3, p);
+                }
+            });
+
+            for(int i = 0; i < pList.size() - 1; i++){
+                if(i + 1 < pList.size())
+                    pList.get(i).setProxAlteradorFase(pList.get(i + 1));
+            }
+            
+            isSuccessBuildChain = true;
+        } catch (Exception e) {
+            isSuccessBuildChain = false;
+        }
+        
+    }
+    
+    public String getQuemPodeMudarFase(){
+        String mensagem = "teste";
+        if(isSuccessBuildChain && this.fase != null){
+            for(Observer o : envolvidos){
+                EnvolvimentoProcesso e = (EnvolvimentoProcesso) o;
+                Pessoa p = e.getPessoaEnvolvimento();
+                if(p instanceof PessoaAdvogado){
+                    mensagem = p.getAlteradorFase(this.fase);
+                }
+            }
+        } else{
+            mensagem = "Não se aplica";
+        }
+        return mensagem;
     }
 }

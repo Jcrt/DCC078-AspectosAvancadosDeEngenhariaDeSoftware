@@ -88,8 +88,11 @@ public class CadastroProcessoAction implements IAction {
 
         } catch (SQLException e) {
             response.sendRedirect("Erro.jsp");
+            e.printStackTrace();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroProcessoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
+
 }

@@ -5,7 +5,7 @@
  */
 package Action;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ public class FormularioPessoaAction implements IAction {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ArrayList<TipoPessoaEnum> tipoPessoa = TipoPessoaEnum.listaTodos();
+            ArrayList<TipoEnvolvimentoEnum> tipoPessoa = TipoEnvolvimentoEnum.listaTodos();
             request.setAttribute("tipoPessoaLista", tipoPessoa);
             
             RequestDispatcher rd = request.getRequestDispatcher("Pessoa/Formulario.jsp");

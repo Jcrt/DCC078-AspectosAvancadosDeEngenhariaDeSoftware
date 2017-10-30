@@ -117,6 +117,37 @@ public class FaseDAO implements IDAO<Fase> {
         return fase;
     }
     
+    public List<Fase> getByTipoEnvolvimento(TipoEnvolvimentoEnum tpEnv) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ArrayList<Fase> fases = new ArrayList<>();
+        String sql = "SELECT id, descricao, tipoEnvolvimentoEnum "
+                + " FROM fase "
+                + " WHERE TipoEnvolvimentoEnum = ?"
+                + " ORDER BY descricao";
+        
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tpEnv.getValor());
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                fases.add(
+                    new Fase(
+                            rs.getInt("id"),
+                            rs.getString("descricao"),
+                            TipoEnvolvimentoEnum.getEnumByInt(rs.getInt("tipoEnvolvimentoEnum"))
+                    )
+                );
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            closeResources(conn, ps);
+            throw e;
+        }
+        return fases;
+    }
+    
     private void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {

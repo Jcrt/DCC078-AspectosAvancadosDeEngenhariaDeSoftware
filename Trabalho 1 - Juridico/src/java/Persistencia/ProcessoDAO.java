@@ -158,7 +158,7 @@ public class ProcessoDAO {
     
     public Processo getProcesso(int idProcesso) throws ClassNotFoundException, SQLException{
         AndamentoDAO aDAO = AndamentoDAO.getInstance();
-        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id"
+        String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id "
                     + "FROM Processo WHERE id = ?";
         Connection conn = null;
         PreparedStatement ps = null;

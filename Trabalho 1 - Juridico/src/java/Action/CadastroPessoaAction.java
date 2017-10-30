@@ -5,15 +5,11 @@
  */
 package Action;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 import Model.PessoaAdvogado;
 import Model.PessoaCliente;
 import Model.PessoaContrario;
 import Model.PessoaOutro;
-import Persistencia.PessoaAdvogadoDAO;
-import Persistencia.PessoaClienteDAO;
-import Persistencia.PessoaContrarioDAO;
-import Persistencia.PessoaOutroDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,6 +17,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Interface.IAction;
+import Persistencia.PessoaDAO;
 
 /**
  *
@@ -40,7 +37,7 @@ public class CadastroPessoaAction implements IAction {
             response.sendRedirect("Pessoa/Formulario.jsp");
         } else {
             try {
-                TipoPessoaEnum tipo = TipoPessoaEnum.getTipoPessoaDeInt( Integer.parseInt(tipoE));
+                TipoEnvolvimentoEnum tipo = TipoEnvolvimentoEnum.getEnumByInt(Integer.parseInt(tipoE));
 
                 switch (tipo) {
                     case ADVOGADO: { 
@@ -48,28 +45,28 @@ public class CadastroPessoaAction implements IAction {
                         pessoa.setEmail(email);
                         pessoa.setNome(nome);
                         pessoa.setNumeroDocumento(documento); 
-                        PessoaAdvogadoDAO.getInstance().salvar(pessoa);
+                        PessoaDAO.getInstance().salvar(pessoa);
                         break;}
                     case CLIENTE:{ 
                         PessoaCliente pessoa = new PessoaCliente();
                         pessoa.setEmail(email);
                         pessoa.setNome(nome);
                         pessoa.setNumeroDocumento(documento);
-                        PessoaClienteDAO.getInstance().salvar(pessoa);
+                        PessoaDAO.getInstance().salvar(pessoa);
                         break;}
                     case CONTRARIO: {
                         PessoaContrario pessoa = new PessoaContrario();
                         pessoa.setEmail(email);
                         pessoa.setNome(nome);
                         pessoa.setNumeroDocumento(documento); 
-                        PessoaContrarioDAO.getInstance().salvar(pessoa);
+                        PessoaDAO.getInstance().salvar(pessoa);
                         break;}
                     case OUTROS: { 
                         PessoaOutro pessoa = new PessoaOutro();
                         pessoa.setEmail(email);
                         pessoa.setNome(nome);
                         pessoa.setNumeroDocumento(documento); 
-                        PessoaOutroDAO.getInstance().salvar(pessoa);
+                        PessoaDAO.getInstance().salvar(pessoa);
                         break;}
                     default: {System.out.println("Escolha um tipo de pessoa correto!"); break;}
                     

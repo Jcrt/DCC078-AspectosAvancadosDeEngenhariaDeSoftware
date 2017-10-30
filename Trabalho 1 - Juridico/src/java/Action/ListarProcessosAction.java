@@ -34,8 +34,15 @@ public class ListarProcessosAction implements IAction {
             request.setAttribute("listaProcessos", listProc);
             request.setAttribute("idPessoa", idPessoa);
             
+            listProc.forEach((p) -> {
+                p.makeChainFase();
+                System.out.println(p.getQuemPodeMudarFase());
+            });
+            
             RequestDispatcher rd = request.getRequestDispatcher("Processo/Listar.jsp");
             rd.forward(request, response);
+            
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ListarProcessosAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

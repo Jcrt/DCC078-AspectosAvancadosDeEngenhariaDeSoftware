@@ -5,7 +5,7 @@
  */
 package Model;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 
 /**
  *
@@ -31,12 +31,11 @@ public class PessoaCliente extends Pessoa {
 
     @Override
     public int getTipoEnum() {
-        return TipoPessoaEnum.CLIENTE.getValor();
+        return TipoEnvolvimentoEnum.CLIENTE.getValor();
     }
 
     @Override
     public String getTipo() {
         return "Cliente";
     }
-
 }

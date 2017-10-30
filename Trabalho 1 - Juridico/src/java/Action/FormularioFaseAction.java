@@ -5,7 +5,7 @@
  */
 package Action;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 import Persistencia.FaseDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class FormularioFaseAction implements IAction {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            ArrayList<TipoPessoaEnum> tpPessoa = TipoPessoaEnum.listaTodos();
+            ArrayList<TipoEnvolvimentoEnum> tpPessoa = TipoEnvolvimentoEnum.listaTodos();
             
             request.setAttribute("tipoPessoaList", tpPessoa);
             request.setAttribute("fasesList", FaseDAO.getInstance().listar());

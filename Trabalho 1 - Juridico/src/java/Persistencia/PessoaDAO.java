@@ -5,7 +5,7 @@
  */
 package Persistencia;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 import Interface.IPessoa;
 import Model.Notificacoes;
 import Model.Pessoa;
@@ -102,7 +102,7 @@ public class PessoaDAO implements IDAO<IPessoa>{
             conn = DatabaseLocator.getInstance().getConnection();
             String sql = "SELECT * FROM pessoa WHERE tipo = ?";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, TipoPessoaEnum.OUTROS.getValor());
+            ps.setInt(1, TipoEnvolvimentoEnum.OUTROS.getValor());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -118,7 +118,7 @@ public class PessoaDAO implements IDAO<IPessoa>{
         return lista;
     }
     
-    public List<IPessoa> listar(TipoPessoaEnum tipoPessoa) throws ClassNotFoundException, SQLException {
+    public List<IPessoa> listar(TipoEnvolvimentoEnum tipoPessoa) throws ClassNotFoundException, SQLException {
         List<IPessoa> lista = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -233,6 +233,7 @@ public class PessoaDAO implements IDAO<IPessoa>{
                         pessoa = new PessoaOutro(rs.getInt("id"), rs.getString("nome"), rs.getString("numeroDocumento"), rs.getString("email"));
                     break;
                 }
+                pessoa.setAlteraFases(FaseDAO.getInstance().getByTipoEnvolvimento(TipoEnvolvimentoEnum.getEnumByInt(pessoa.getTipoEnum())));
             }
             
         } catch(SQLException e){

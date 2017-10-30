@@ -5,7 +5,7 @@
  */
 package Action;
 
-import Enum.TipoPessoaEnum;
+import Enum.TipoEnvolvimentoEnum;
 import Interface.IPessoa;
 import Persistencia.PessoaDAO;
 import java.io.IOException;
@@ -32,12 +32,12 @@ public class FormularioProcessoAction implements IAction {
         try {
             PessoaDAO pDAO = PessoaDAO.getInstance();
             
-            List<IPessoa> pCli = pDAO.listar(TipoPessoaEnum.CLIENTE);
-            List<IPessoa> pAdv = pDAO.listar(TipoPessoaEnum.ADVOGADO);
-            List<IPessoa> pCon = pDAO.listar(TipoPessoaEnum.CONTRARIO);
+            List<IPessoa> pCli = pDAO.listar(TipoEnvolvimentoEnum.CLIENTE);
+            List<IPessoa> pAdv = pDAO.listar(TipoEnvolvimentoEnum.ADVOGADO);
+            List<IPessoa> pCon = pDAO.listar(TipoEnvolvimentoEnum.CONTRARIO);
 
 
-            List<IPessoa> pOut = pDAO.listar(TipoPessoaEnum.OUTROS);
+            List<IPessoa> pOut = pDAO.listar(TipoEnvolvimentoEnum.OUTROS);
             List<Fase> fases = FaseDAO.getInstance().listar();
              
             request.setAttribute("clientes", pCli);

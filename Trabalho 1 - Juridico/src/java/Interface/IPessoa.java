@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import Model.Fase;
+
 /**
  *
  * @author 07228620674
@@ -24,4 +26,5 @@ public interface IPessoa {
     public String getNumeroDocumento();
 
     public int getId();
+    
 }
