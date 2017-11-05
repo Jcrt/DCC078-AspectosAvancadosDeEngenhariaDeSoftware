@@ -109,7 +109,8 @@ public class ProcessoDAO {
     public List<Processo> listar() throws ClassNotFoundException, SQLException{
         AndamentoDAO aDAO = AndamentoDAO.getInstance();
         String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id "
-                    + "FROM Processo";
+                    + "FROM Processo "
+                    + "WHERE isApagado = 0";
         
         List<Processo> lista = new ArrayList<>();
         Connection conn = null;
@@ -159,7 +160,9 @@ public class ProcessoDAO {
     public Processo getProcesso(int idProcesso) throws ClassNotFoundException, SQLException{
         AndamentoDAO aDAO = AndamentoDAO.getInstance();
         String sql = "SELECT id, numeroProcesso, status, dataCadastro, dataBaixa, dataEncerramento, fase_id "
-                    + "FROM Processo WHERE id = ?";
+                    + "FROM Processo "
+                    + "WHERE id = ? "
+                    + " AND isApagado = 0";
         Connection conn = null;
         PreparedStatement ps = null;
         Processo model = null;

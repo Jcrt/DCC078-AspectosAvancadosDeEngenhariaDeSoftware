@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -156,9 +155,12 @@ public class Processo extends Observable {
     public void makeChainFase(){
         
         try {
-            ArrayList<Pessoa> pList = new ArrayList<>();
+            ArrayList<Pessoa> pList = new ArrayList<>(4);
         
-            envolvidos.stream().map((envolvido) -> (EnvolvimentoProcesso) envolvido).map((env) -> env.getPessoaEnvolvimento()).forEachOrdered((p) -> {
+            for(Observer envolvido : envolvidos){
+                EnvolvimentoProcesso env = (EnvolvimentoProcesso) envolvido;
+                Pessoa p = env.getPessoaEnvolvimento();
+                
                 if(p instanceof PessoaAdvogado){
                     pList.add(0, p);
                 } else if(p instanceof PessoaCliente){
@@ -168,7 +170,19 @@ public class Processo extends Observable {
                 } else if(p instanceof PessoaOutro){
                     pList.add(3, p);
                 }
-            });
+            }
+            
+            /*envolvidos.stream().map((envolvido) -> (EnvolvimentoProcesso) envolvido).map((env) -> env.getPessoaEnvolvimento()).forEachOrdered((p) -> {
+                if(p instanceof PessoaAdvogado){
+                    pList.add(0, p);
+                } else if(p instanceof PessoaCliente){
+                    pList.add(1, p);
+                } else if(p instanceof PessoaContrario){
+                    pList.add(2, p);
+                } else if(p instanceof PessoaOutro){
+                    pList.add(3, p);
+                }
+            });*/
 
             for(int i = 0; i < pList.size() - 1; i++){
                 if(i + 1 < pList.size())
@@ -183,18 +197,30 @@ public class Processo extends Observable {
     }
     
     public String getQuemPodeMudarFase(){
-        String mensagem = "teste";
+        String mensagem = "Não se aplica";
         if(isSuccessBuildChain && this.fase != null){
             for(Observer o : envolvidos){
                 EnvolvimentoProcesso e = (EnvolvimentoProcesso) o;
                 Pessoa p = e.getPessoaEnvolvimento();
                 if(p instanceof PessoaAdvogado){
-                    mensagem = p.getAlteradorFase(this.fase);
+                   return p.getAlteradorFase(this.fase);
                 }
             }
-        } else{
-            mensagem = "Não se aplica";
-        }
+        } 
+        return mensagem;
+    }
+    
+    public String getQuemPodeMudarFase(int idPessoa){
+        String mensagem = "Não se aplica";
+        if(isSuccessBuildChain && this.fase != null){
+            for(Observer o : envolvidos){
+                EnvolvimentoProcesso e = (EnvolvimentoProcesso) o;
+                Pessoa p = e.getPessoaEnvolvimento();
+                if(p instanceof PessoaAdvogado){
+                   return p.getAlteradorFase(this.fase, idPessoa, this.id);
+                }
+            }
+        } 
         return mensagem;
     }
 }

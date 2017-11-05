@@ -6,6 +6,7 @@
 package Model;
 
 import Enum.TipoEnvolvimentoEnum;
+import java.util.Objects;
 
 /**
  *
@@ -56,5 +57,23 @@ public class Fase {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    
+    @Override
+    public boolean equals(Object fase){
+        if(fase instanceof Fase){
+            Fase f = (Fase) fase;
+            return f.id == this.id && f.descricao.equals(this.descricao);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.tipoResponsavel);
+        hash = 97 * hash + Objects.hashCode(this.descricao);
+        return hash;
     }
 }

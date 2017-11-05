@@ -11,6 +11,7 @@ package Classes;
  */
 public class PadraoChainOfResponsability {
     public static void main(String [] args){
+        
         FuncionarioReitor reitor = new FuncionarioReitor(null);
         FuncionarioDiretor diretor = new FuncionarioDiretor(reitor);
         FuncionarioCoordenador coordenador = new FuncionarioCoordenador(diretor);
@@ -26,5 +27,6 @@ public class PadraoChainOfResponsability {
                 secretaria.assinarDocumento(new Documento(RolDocumentos.getInstance().getTipoDocumentoDiploma())));
         System.out.println(
                 secretaria.assinarDocumento(new Documento(RolDocumentos.getInstance().getTipoDocumentoBoleto())));
+        
     }
 }

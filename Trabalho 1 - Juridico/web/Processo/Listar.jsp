@@ -43,7 +43,7 @@
                             <td style="white-space: nowrap">${processo.getStatusString()}</td>
                             <!-- <td>${processo.getAndamentos().size()}</td> -->
                             <td style="white-space: nowrap">${processo.getFaseDescr()}</td>
-                            <td style="white-space: nowrap">${processo.getQuemPodeMudarFase()}</td>
+                            <td style="white-space: nowrap">${processo.getQuemPodeMudarFase(idPessoa)}</td>
                             <td style="white-space: nowrap">${processo.getMsgEnvolvimentoPessoa(Integer.parseInt(idPessoa))}</td>
                             <td style="white-space: nowrap">
                                 <a href="FrontController?action=FormularioStatusProcesso&amp;idProcesso=${processo.getId()}" title="Clique para editar status do processo">

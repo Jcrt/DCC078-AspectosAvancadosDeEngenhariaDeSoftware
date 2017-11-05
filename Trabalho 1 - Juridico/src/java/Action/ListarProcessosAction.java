@@ -17,6 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Interface.IAction;
+import Model.Pessoa;
+import Persistencia.PessoaDAO;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,6 +31,7 @@ public class ListarProcessosAction implements IAction {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             ProcessoDAO pDAO = ProcessoDAO.getInstance();
+            
             List<Processo> listProc = pDAO.listar();
             int idPessoa = (int) request.getSession(true).getAttribute("idPessoa");
             
@@ -36,7 +40,7 @@ public class ListarProcessosAction implements IAction {
             
             listProc.forEach((p) -> {
                 p.makeChainFase();
-                System.out.println(p.getQuemPodeMudarFase());
+                System.out.println(p.getQuemPodeMudarFase(idPessoa));
             });
             
             RequestDispatcher rd = request.getRequestDispatcher("Processo/Listar.jsp");

@@ -95,11 +95,29 @@ public abstract class Pessoa implements IPessoa {
             return getMsgAlteracaoFase();
         } else{
             if(proxAlteradorFase != null){
-                return proxAlteradorFase.getMsgAlteracaoFase();
+                return proxAlteradorFase.getAlteradorFase(fase);
             } else{
                 return "Qualquer usuário pode alterar a fase";
             }
         }
+    }
+    
+    public String getAlteradorFase(Fase fase, int idPessoa, int idProcesso){
+        String msg;
+        if(alteraFases.contains(fase)){
+            msg = getMsgAlteracaoFase();
+        } else{
+            if(proxAlteradorFase != null){
+                return proxAlteradorFase.getAlteradorFase(fase);
+            } else{
+                msg = "Qualquer usuário pode alterar a fase";
+            }
+        }
+        if(this.id == idPessoa){
+            msg = "<a href='FrontController?action=alterarFase&idProcesso=" + 
+                    String.valueOf(idProcesso) + "'>" +  msg + "</a>";
+        } 
+        return msg;
     }
     
     public Pessoa getProxAlteradorFase() {
